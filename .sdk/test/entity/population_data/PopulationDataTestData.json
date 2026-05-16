@@ -1,0 +1,22 @@
+{
+  "existing": {
+    "population_data": {
+      "POPULATION_DATA00": {
+        "record": {}
+      },
+      "POPULATION_DATA01": {
+        "record": {}
+      },
+      "POPULATION_DATA02": {
+        "record": {}
+      }
+    }
+  },
+  "new": {
+    "population_data": {
+      "population_data_ref01": {
+        "record": {}
+      }
+    }
+  }
+}

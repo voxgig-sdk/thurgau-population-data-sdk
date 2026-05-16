@@ -1,0 +1,40 @@
+# BasicPopulationDataFlow
+
+main: kit: flow: BasicPopulationDataFlow:
+{
+  entity: "population_data",
+  kind: "basic",
+  name: "BasicPopulationDataFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "population_data_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "population_data_ref01",
+        srcdatavar: "population_data_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-population_data_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPopulationDataFlow"
+}

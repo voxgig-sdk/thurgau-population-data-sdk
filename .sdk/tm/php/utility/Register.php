@@ -1,0 +1,67 @@
+<?php
+declare(strict_types=1);
+
+// ThurgauPopulationData SDK utility registration
+
+require_once __DIR__ . '/../core/UtilityType.php';
+require_once __DIR__ . '/Clean.php';
+require_once __DIR__ . '/Done.php';
+require_once __DIR__ . '/MakeError.php';
+require_once __DIR__ . '/FeatureAdd.php';
+require_once __DIR__ . '/FeatureHook.php';
+require_once __DIR__ . '/FeatureInit.php';
+require_once __DIR__ . '/Fetcher.php';
+require_once __DIR__ . '/MakeFetchDef.php';
+require_once __DIR__ . '/MakeContext.php';
+require_once __DIR__ . '/MakeOptions.php';
+require_once __DIR__ . '/MakeRequest.php';
+require_once __DIR__ . '/MakeResponse.php';
+require_once __DIR__ . '/MakeResult.php';
+require_once __DIR__ . '/MakePoint.php';
+require_once __DIR__ . '/MakeSpec.php';
+require_once __DIR__ . '/MakeUrl.php';
+require_once __DIR__ . '/Param.php';
+require_once __DIR__ . '/PrepareAuth.php';
+require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/PrepareHeaders.php';
+require_once __DIR__ . '/PrepareMethod.php';
+require_once __DIR__ . '/PrepareParams.php';
+require_once __DIR__ . '/PreparePath.php';
+require_once __DIR__ . '/PrepareQuery.php';
+require_once __DIR__ . '/ResultBasic.php';
+require_once __DIR__ . '/ResultBody.php';
+require_once __DIR__ . '/ResultHeaders.php';
+require_once __DIR__ . '/TransformRequest.php';
+require_once __DIR__ . '/TransformResponse.php';
+
+ThurgauPopulationDataUtility::setRegistrar(function (ThurgauPopulationDataUtility $u): void {
+    $u->clean = [ThurgauPopulationDataClean::class, 'call'];
+    $u->done = [ThurgauPopulationDataDone::class, 'call'];
+    $u->make_error = [ThurgauPopulationDataMakeError::class, 'call'];
+    $u->feature_add = [ThurgauPopulationDataFeatureAdd::class, 'call'];
+    $u->feature_hook = [ThurgauPopulationDataFeatureHook::class, 'call'];
+    $u->feature_init = [ThurgauPopulationDataFeatureInit::class, 'call'];
+    $u->fetcher = [ThurgauPopulationDataFetcher::class, 'call'];
+    $u->make_fetch_def = [ThurgauPopulationDataMakeFetchDef::class, 'call'];
+    $u->make_context = [ThurgauPopulationDataMakeContext::class, 'call'];
+    $u->make_options = [ThurgauPopulationDataMakeOptions::class, 'call'];
+    $u->make_request = [ThurgauPopulationDataMakeRequest::class, 'call'];
+    $u->make_response = [ThurgauPopulationDataMakeResponse::class, 'call'];
+    $u->make_result = [ThurgauPopulationDataMakeResult::class, 'call'];
+    $u->make_point = [ThurgauPopulationDataMakePoint::class, 'call'];
+    $u->make_spec = [ThurgauPopulationDataMakeSpec::class, 'call'];
+    $u->make_url = [ThurgauPopulationDataMakeUrl::class, 'call'];
+    $u->param = [ThurgauPopulationDataParam::class, 'call'];
+    $u->prepare_auth = [ThurgauPopulationDataPrepareAuth::class, 'call'];
+    $u->prepare_body = [ThurgauPopulationDataPrepareBody::class, 'call'];
+    $u->prepare_headers = [ThurgauPopulationDataPrepareHeaders::class, 'call'];
+    $u->prepare_method = [ThurgauPopulationDataPrepareMethod::class, 'call'];
+    $u->prepare_params = [ThurgauPopulationDataPrepareParams::class, 'call'];
+    $u->prepare_path = [ThurgauPopulationDataPreparePath::class, 'call'];
+    $u->prepare_query = [ThurgauPopulationDataPrepareQuery::class, 'call'];
+    $u->result_basic = [ThurgauPopulationDataResultBasic::class, 'call'];
+    $u->result_body = [ThurgauPopulationDataResultBody::class, 'call'];
+    $u->result_headers = [ThurgauPopulationDataResultHeaders::class, 'call'];
+    $u->transform_request = [ThurgauPopulationDataTransformRequest::class, 'call'];
+    $u->transform_response = [ThurgauPopulationDataTransformResponse::class, 'call'];
+});

@@ -1,0 +1,28 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "Open Data Kanton Thurgau"
+        url: "https://data.tg.ch"
+      }
+      description: "API providing data on the permanent population of the Thurgau canton since 2007. Includes information on residents with main residence in Thurgau and specific considerations for foreign population. The dataset contains data from the cantonal population survey of the Office for Data and Statistics of Canton Thurgau. The cantonal population statistics were revised as of December 31, 2015. Since 2015, the permanent resident population includes all persons with main residence in Canton Thurgau. For the foreign population, persons with permits B, C and L permits of 12 months or more are considered."
+      license: {
+        name: "Open Government Data"
+        url: "https://data.tg.ch"
+      }
+      servers: [
+        {
+          description: "Production server"
+          url: "https://data.tg.ch/api"
+        }
+      ]
+      title: "Thurgau Population Data"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

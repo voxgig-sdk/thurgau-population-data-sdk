@@ -1,0 +1,315 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Thurgau Population Data",
+    "description": "API providing data on the permanent population of the Thurgau canton since 2007. Includes information on residents with main residence in Thurgau and specific considerations for foreign population. The dataset contains data from the cantonal population survey of the Office for Data and Statistics of Canton Thurgau. The cantonal population statistics were revised as of December 31, 2015. Since 2015, the permanent resident population includes all persons with main residence in Canton Thurgau. For the foreign population, persons with permits B, C and L permits of 12 months or more are considered.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Open Data Kanton Thurgau",
+      "url": "https://data.tg.ch"
+    },
+    "license": {
+      "name": "Open Government Data",
+      "url": "https://data.tg.ch"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://data.tg.ch/api",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/explore/v2.1/catalog/datasets/sk-stat-56/records": {
+      "get": {
+        "summary": "Get population records",
+        "description": "Retrieves records of the permanent resident population of Thurgau municipalities since 2007. Data includes information on residents with main residence in Thurgau canton.",
+        "operationId": "getPopulationRecords",
+        "tags": [
+          "Population Data"
+        ],
+        "parameters": [
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Fields to include in the response",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "description": "Filter expression to apply to records",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of records to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Number of records to skip for pagination",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "description": "Field(s) to order results by",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "refine",
+            "in": "query",
+            "description": "Refine results by specific facet values",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exclude",
+            "in": "query",
+            "description": "Exclude specific facet values from results",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with population records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {
+                      "type": "integer",
+                      "description": "Total number of records matching the query"
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "record": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "Unique record identifier"
+                              },
+                              "timestamp": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "Record timestamp"
+                              },
+                              "fields": {
+                                "type": "object",
+                                "description": "Population data fields including municipality, year, population counts, and demographic breakdowns"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dataset not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json": {
+      "get": {
+        "summary": "Export population data as JSON",
+        "description": "Exports the complete dataset of permanent resident population as JSON",
+        "operationId": "exportPopulationJSON",
+        "tags": [
+          "Population Data"
+        ],
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "description": "Filter expression to apply to exported records",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "refine",
+            "in": "query",
+            "description": "Refine export by specific facet values",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful export of population data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Population record with all available fields"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "404": {
+            "description": "Dataset not found"
+          }
+        }
+      }
+    },
+    "/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv": {
+      "get": {
+        "summary": "Export population data as CSV",
+        "description": "Exports the complete dataset of permanent resident population as CSV",
+        "operationId": "exportPopulationCSV",
+        "tags": [
+          "Population Data"
+        ],
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "description": "Filter expression to apply to exported records",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "refine",
+            "in": "query",
+            "description": "Refine export by specific facet values",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "delimiter",
+            "in": "query",
+            "description": "CSV delimiter character",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ";"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful export of population data",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "CSV formatted population data"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "404": {
+            "description": "Dataset not found"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Population Data",
+      "description": "Operations related to Thurgau canton permanent resident population data"
+    }
+  ],
+  "externalDocs": {
+    "description": "Dataset information page",
+    "url": "https://data.tg.ch/explore/dataset/sk-stat-56/information/"
+  }
+}
