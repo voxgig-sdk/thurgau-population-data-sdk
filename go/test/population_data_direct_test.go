@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/thurgau-population-data-sdk"
-	"github.com/voxgig-sdk/thurgau-population-data-sdk/core"
+	sdk "github.com/voxgig-sdk/thurgau-population-data-sdk/go"
+	"github.com/voxgig-sdk/thurgau-population-data-sdk/go/core"
 )
 
 func TestPopulationDataDirect(t *testing.T) {

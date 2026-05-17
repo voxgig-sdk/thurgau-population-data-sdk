@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/thurgau-population-data-sdk/core"
+import "github.com/voxgig-sdk/thurgau-population-data-sdk/go/core"
 
 func init() {
 	core.UtilityRegistrar = registerAll

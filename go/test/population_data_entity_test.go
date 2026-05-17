@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/thurgau-population-data-sdk"
-	"github.com/voxgig-sdk/thurgau-population-data-sdk/core"
+	sdk "github.com/voxgig-sdk/thurgau-population-data-sdk/go"
+	"github.com/voxgig-sdk/thurgau-population-data-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/thurgau-population-data-sdk/go/utility/struct"
 )
 
 func TestPopulationDataEntity(t *testing.T) {

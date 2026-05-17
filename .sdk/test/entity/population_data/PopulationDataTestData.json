@@ -2,13 +2,16 @@
   "existing": {
     "population_data": {
       "POPULATION_DATA00": {
-        "record": {}
+        "record": {},
+        "id": "POPULATION_DATA00"
       },
       "POPULATION_DATA01": {
-        "record": {}
+        "record": {},
+        "id": "POPULATION_DATA01"
       },
       "POPULATION_DATA02": {
-        "record": {}
+        "record": {},
+        "id": "POPULATION_DATA02"
       }
     }
   },
