@@ -164,14 +164,12 @@ func population_dataDirectSetup(mockres any) *population_dataDirectSetupResult {
 	env := envOverride(map[string]any{
 		"THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID": map[string]any{},
 		"THURGAUPOPULATIONDATA_TEST_LIVE":    "FALSE",
-		"THURGAUPOPULATIONDATA_APIKEY":       "NONE",
 	})
 
 	live := env["THURGAUPOPULATIONDATA_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["THURGAUPOPULATIONDATA_APIKEY"],
 		}
 		client := sdk.NewThurgauPopulationDataSDK(mergedOpts)
 

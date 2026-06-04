@@ -106,14 +106,12 @@ def population_data_direct_setup(mockres)
   env = Runner.env_override({
     "THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID" => {},
     "THURGAUPOPULATIONDATA_TEST_LIVE" => "FALSE",
-    "THURGAUPOPULATIONDATA_APIKEY" => "NONE",
   })
 
   live = env["THURGAUPOPULATIONDATA_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["THURGAUPOPULATIONDATA_APIKEY"],
     }
     client = ThurgauPopulationDataSDK.new(merged_opts)
     return {

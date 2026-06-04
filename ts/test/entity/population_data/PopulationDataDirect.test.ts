@@ -135,14 +135,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID': {},
     'THURGAUPOPULATIONDATA_TEST_LIVE': 'FALSE',
-    'THURGAUPOPULATIONDATA_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.THURGAUPOPULATIONDATA_TEST_LIVE
 
   if (live) {
     const client = new ThurgauPopulationDataSDK({
-      apikey: env.THURGAUPOPULATIONDATA_APIKEY,
     })
 
     let idmap: any = env['THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID']
