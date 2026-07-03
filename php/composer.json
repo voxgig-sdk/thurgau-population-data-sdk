@@ -1,8 +1,17 @@
 {
   "name": "voxgig-sdk/thurgau-population-data",
-  "description": "ThurgauPopulationData SDK for PHP",
+  "description": "Unofficial generated PHP SDK for the Thurgau Population Data public API. Not affiliated with or endorsed by the upstream API provider.",
   "type": "library",
+  "keywords": ["voxgig", "sdk", "generated-sdk", "openapi", "api-client", "thurgau-population-data"],
+  "homepage": "https://github.com/voxgig-sdk/thurgau-population-data-sdk",
   "license": "MIT",
+  "authors": [
+    { "name": "Voxgig", "homepage": "https://voxgig.com" }
+  ],
+  "support": {
+    "issues": "https://github.com/voxgig-sdk/thurgau-population-data-sdk/issues",
+    "source": "https://github.com/voxgig-sdk/thurgau-population-data-sdk"
+  },
   "minimum-stability": "stable",
   "require": {
     "php": ">=8.2"

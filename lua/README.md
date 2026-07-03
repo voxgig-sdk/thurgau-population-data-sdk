@@ -10,7 +10,7 @@ The Lua SDK for the ThurgauPopulationData API — an entity-oriented client usin
 
 ## Install
 ```bash
-luarocks install thurgau-population-data-sdk
+luarocks install voxgig-sdk-thurgau-population-data
 ```
 
 If the module is not yet published, add the source directory to

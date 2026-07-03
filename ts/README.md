@@ -10,7 +10,7 @@ The TypeScript SDK for the ThurgauPopulationData API — a type-safe, entity-ori
 
 ## Install
 ```bash
-npm install thurgau-population-data
+npm install @voxgig-sdk/thurgau-population-data
 ```
 ## Tutorial: your first API call
 

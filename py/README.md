@@ -10,7 +10,7 @@ The Python SDK for the ThurgauPopulationData API — an entity-oriented client f
 
 ## Install
 ```bash
-pip install thurgau-population-data-sdk
+pip install voxgig-sdk-thurgau-population-data
 ```
 
 Or install from source:

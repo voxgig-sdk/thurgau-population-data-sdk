@@ -10,13 +10,13 @@ The Ruby SDK for the ThurgauPopulationData API — an entity-oriented client usi
 
 ## Install
 ```bash
-gem install thurgau-population-data-sdk
+gem install voxgig-sdk-thurgau-population-data
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "thurgau-population-data-sdk"
+gem "voxgig-sdk-thurgau-population-data"
 ```
 
 Then run:

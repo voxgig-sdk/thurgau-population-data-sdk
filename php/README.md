@@ -10,7 +10,7 @@ The PHP SDK for the ThurgauPopulationData API — an entity-oriented client usin
 
 ## Install
 ```bash
-composer require voxgig/thurgau-population-data-sdk
+composer require voxgig-sdk/thurgau-population-data
 ```
 
 
