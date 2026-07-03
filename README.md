@@ -1,22 +1,8 @@
 # ThurgauPopulationData SDK
 
-Permanent population counts for the Swiss canton of Thurgau, from 2007 onwards
+Thurgau Population Data client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Thurgau Population Data
-
-This SDK wraps the population dataset published by [Open Government Data Kanton Thurgau](https://data.tg.ch/), the open data portal operated by the Swiss canton of Thurgau. The dataset covers the canton's permanent resident population from 2007 onwards.
-
-What you get from the API:
-
-- Records from the `sk-stat-56` dataset, queried through the Opendatasoft Explore API at `/api/explore/v2.1/catalog/datasets/sk-stat-56/records`.
-- Standard Explore query parameters such as `limit`, `offset`, `where`, `select`, `group_by`, and `order_by` for filtering and pagination.
-
-Operational notes:
-
-- No authentication is required and CORS is enabled, so the API can be called directly from browsers.
-- The portal is built on the Opendatasoft platform, so general Opendatasoft Explore v2.1 conventions apply.
 
 ## Try it
 
@@ -50,29 +36,31 @@ gem install thurgau-population-data-sdk
 luarocks install thurgau-population-data-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { ThurgauPopulationDataSDK } from 'thurgau-population-data'
 
-const client = new ThurgauPopulationDataSDK({})
+const client = new ThurgauPopulationDataSDK({
+  apikey: process.env.THURGAU-POPULATION-DATA_APIKEY,
+})
 
 // List all populationdatas
 const populationdatas = await client.PopulationData().list()
+console.log(populationdatas.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -102,7 +90,7 @@ The API exposes one entity:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **PopulationData** | Permanent population records for the canton of Thurgau, served from the `sk-stat-56` dataset at `/api/explore/v2.1/catalog/datasets/sk-stat-56/records`. | `/explore/v2.1/catalog/datasets/sk-stat-56/records` |
+| **PopulationData** |  | `/explore/v2.1/catalog/datasets/sk-stat-56/records` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -112,17 +100,20 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from thurgaupopulationdata_sdk import ThurgauPopulationDataSDK
 
-client = ThurgauPopulationDataSDK({})
+client = ThurgauPopulationDataSDK({
+    "apikey": os.environ.get("THURGAU-POPULATION-DATA_APIKEY"),
+})
 
 # List all populationdatas
-populationdatas, err = client.PopulationData(None).list(None, None)
+populationdatas, err = client.PopulationData().list()
+print(populationdatas)
 
 # Load a specific populationdata
-populationdata, err = client.PopulationData(None).load(
-    {"id": "example_id"}, None
-)
+populationdata, err = client.PopulationData().load({"id": "example_id"})
+print(populationdata)
 ```
 
 ### PHP
@@ -131,15 +122,17 @@ populationdata, err = client.PopulationData(None).load(
 <?php
 require_once 'thurgaupopulationdata_sdk.php';
 
-$client = new ThurgauPopulationDataSDK([]);
+$client = new ThurgauPopulationDataSDK([
+    "apikey" => getenv("THURGAU-POPULATION-DATA_APIKEY"),
+]);
 
 // List all populationdatas
-[$populationdatas, $err] = $client->PopulationData(null)->list(null, null);
+[$populationdatas, $err] = $client->PopulationData()->list();
+print_r($populationdatas);
 
 // Load a specific populationdata
-[$populationdata, $err] = $client->PopulationData(null)->load(
-    ["id" => "example_id"], null
-);
+[$populationdata, $err] = $client->PopulationData()->load(["id" => "example_id"]);
+print_r($populationdata);
 ```
 
 ### Golang
@@ -147,10 +140,13 @@ $client = new ThurgauPopulationDataSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/thurgau-population-data-sdk/go"
 
-client := sdk.NewThurgauPopulationDataSDK(map[string]any{})
+client := sdk.NewThurgauPopulationDataSDK(map[string]any{
+    "apikey": os.Getenv("THURGAU-POPULATION-DATA_APIKEY"),
+})
 
 // List all populationdatas
 populationdatas, err := client.PopulationData(nil).List(nil, nil)
+fmt.Println(populationdatas)
 ```
 
 ### Ruby
@@ -158,15 +154,17 @@ populationdatas, err := client.PopulationData(nil).List(nil, nil)
 ```ruby
 require_relative "ThurgauPopulationData_sdk"
 
-client = ThurgauPopulationDataSDK.new({})
+client = ThurgauPopulationDataSDK.new({
+  "apikey" => ENV["THURGAU-POPULATION-DATA_APIKEY"],
+})
 
 # List all populationdatas
-populationdatas, err = client.PopulationData(nil).list(nil, nil)
+populationdatas, err = client.PopulationData().list
+puts populationdatas
 
 # Load a specific populationdata
-populationdata, err = client.PopulationData(nil).load(
-  { "id" => "example_id" }, nil
-)
+populationdata, err = client.PopulationData().load({ "id" => "example_id" })
+puts populationdata
 ```
 
 ### Lua
@@ -174,15 +172,17 @@ populationdata, err = client.PopulationData(nil).load(
 ```lua
 local sdk = require("thurgau-population-data_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("THURGAU-POPULATION-DATA_APIKEY"),
+})
 
 -- List all populationdatas
-local populationdatas, err = client:PopulationData(nil):list(nil, nil)
+local populationdatas, err = client:PopulationData():list()
+print(populationdatas)
 
 -- Load a specific populationdata
-local populationdata, err = client:PopulationData(nil):load(
-  { id = "example_id" }, nil
-)
+local populationdata, err = client:PopulationData():load({ id = "example_id" })
+print(populationdata)
 ```
 
 ## Unit testing in offline mode
@@ -201,25 +201,21 @@ const result = await client.PopulationData().load({ id: 'test01' })
 ### Python
 
 ```python
-client = ThurgauPopulationDataSDK.test(None, None)
-result, err = client.PopulationData(None).load(
-    {"id": "test01"}, None
-)
+client = ThurgauPopulationDataSDK.test()
+result, err = client.PopulationData().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = ThurgauPopulationDataSDK::test(null, null);
-[$result, $err] = $client->PopulationData(null)->load(
-    ["id" => "test01"], null
-);
+$client = ThurgauPopulationDataSDK::test();
+[$result, $err] = $client->PopulationData()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.PopulationData(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -228,19 +224,15 @@ result, err := client.PopulationData(nil).Load(
 ### Ruby
 
 ```ruby
-client = ThurgauPopulationDataSDK.test(nil, nil)
-result, err = client.PopulationData(nil).load(
-  { "id" => "test01" }, nil
-)
+client = ThurgauPopulationDataSDK.test
+result, err = client.PopulationData().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:PopulationData(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:PopulationData():load({ id = "test01" })
 ```
 
 ## How it works
@@ -344,15 +336,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Thurgau Population Data
-
-- Upstream: [https://data.tg.ch/](https://data.tg.ch/)
-- API docs: [https://data.tg.ch/api-console/](https://data.tg.ch/api-console/)
-
-- Published as Open Government Data by Kanton Thurgau on the data.tg.ch portal.
-- Attribution to the canton of Thurgau / data.tg.ch is expected when redistributing or visualising the data.
-- Refer to the portal's terms and conditions on [data.tg.ch](https://data.tg.ch/) for the authoritative licence text.
 
 ---
 

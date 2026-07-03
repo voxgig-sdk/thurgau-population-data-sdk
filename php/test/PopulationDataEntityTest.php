@@ -92,6 +92,7 @@ function population_data_basic_setup($extra)
         "THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID" => $idmap,
         "THURGAUPOPULATIONDATA_TEST_LIVE" => "FALSE",
         "THURGAUPOPULATIONDATA_TEST_EXPLAIN" => "FALSE",
+        "THURGAUPOPULATIONDATA_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -103,6 +104,7 @@ function population_data_basic_setup($extra)
     if ($env["THURGAUPOPULATIONDATA_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
+                "apikey" => $env["THURGAUPOPULATIONDATA_APIKEY"],
             ],
             $extra ?? [],
         ]);

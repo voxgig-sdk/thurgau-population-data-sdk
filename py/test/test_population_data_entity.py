@@ -98,6 +98,7 @@ def _population_data_basic_setup(extra):
         "THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID": idmap,
         "THURGAUPOPULATIONDATA_TEST_LIVE": "FALSE",
         "THURGAUPOPULATIONDATA_TEST_EXPLAIN": "FALSE",
+        "THURGAUPOPULATIONDATA_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -108,6 +109,7 @@ def _population_data_basic_setup(extra):
     if env.get("THURGAUPOPULATIONDATA_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("THURGAUPOPULATIONDATA_APIKEY"),
             },
             extra or {},
         ])

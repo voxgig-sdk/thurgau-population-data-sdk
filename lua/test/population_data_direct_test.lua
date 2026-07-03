@@ -107,12 +107,14 @@ function population_data_direct_setup(mockres)
   local env = runner.env_override({
     ["THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID"] = {},
     ["THURGAUPOPULATIONDATA_TEST_LIVE"] = "FALSE",
+    ["THURGAUPOPULATIONDATA_APIKEY"] = "NONE",
   })
 
   local live = env["THURGAUPOPULATIONDATA_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["THURGAUPOPULATIONDATA_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

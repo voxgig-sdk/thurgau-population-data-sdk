@@ -21,28 +21,7 @@ main: {
       ]
       title: "Thurgau Population Data"
       version: "1.0.0"
-      tagline: "Permanent population counts for the Swiss canton of Thurgau, from 2007 onwards"
-      homepage: "https://data.tg.ch/"
-      docs_url: "https://data.tg.ch/api-console/"
-      license_short: "Open Government Data (Kanton Thurgau)"
-      license_md: `- Published as Open Government Data by Kanton Thurgau on the data.tg.ch portal.
-- Attribution to the canton of Thurgau / data.tg.ch is expected when redistributing or visualising the data.
-- Refer to the portal's terms and conditions on [data.tg.ch](https://data.tg.ch/) for the authoritative licence text.`
-      about_md: `This SDK wraps the population dataset published by [Open Government Data Kanton Thurgau](https://data.tg.ch/), the open data portal operated by the Swiss canton of Thurgau. The dataset covers the canton's permanent resident population from 2007 onwards.
-
-What you get from the API:
-
-- Records from the \`sk-stat-56\` dataset, queried through the Opendatasoft Explore API at \`/api/explore/v2.1/catalog/datasets/sk-stat-56/records\`.
-- Standard Explore query parameters such as \`limit\`, \`offset\`, \`where\`, \`select\`, \`group_by\`, and \`order_by\` for filtering and pagination.
-
-Operational notes:
-
-- No authentication is required and CORS is enabled, so the API can be called directly from browsers.
-- The portal is built on the Opendatasoft platform, so general Opendatasoft Explore v2.1 conventions apply.`
-      entity_desc: {
-        population_data: "Permanent population records for the canton of Thurgau, served from the `sk-stat-56` dataset at `/api/explore/v2.1/catalog/datasets/sk-stat-56/records`."
-      }
-      auth: false
     }
   }
 }
+

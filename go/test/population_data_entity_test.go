@@ -129,6 +129,7 @@ func population_dataBasicSetup(extra map[string]any) *entityTestSetup {
 		"THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID": idmap,
 		"THURGAUPOPULATIONDATA_TEST_LIVE":      "FALSE",
 		"THURGAUPOPULATIONDATA_TEST_EXPLAIN":   "FALSE",
+		"THURGAUPOPULATIONDATA_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID"])
@@ -139,6 +140,7 @@ func population_dataBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["THURGAUPOPULATIONDATA_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["THURGAUPOPULATIONDATA_APIKEY"],
 			},
 			extra,
 		})
