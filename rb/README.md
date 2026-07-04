@@ -28,16 +28,14 @@ require_relative "ThurgauPopulationData_sdk"
 client = ThurgauPopulationDataSDK.new
 ```
 
-### 2. List populationdatas
+### 2. List populationdata records
 
 ```ruby
 begin
-  result = client.populationdata.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of PopulationData records — iterate directly.
+  populationdatas = client.PopulationData.list
+  populationdatas.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -48,8 +46,9 @@ end
 
 ```ruby
 begin
-  result = client.populationdata.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare PopulationData record (raises on error).
+  populationdata = client.PopulationData.load({ "id" => "example_id" })
+  puts populationdata
 rescue => err
   warn "load failed: #{err}"
 end
@@ -96,13 +95,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = ThurgauPopulationDataSDK.test
+client = ThurgauPopulationDataSDK.test({
+  "entity" => { "populationdata" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.populationdata.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+populationdata = client.PopulationData.load({ "id" => "test01" })
+puts populationdata
 ```
 
 ### Use a custom fetch function
@@ -234,7 +237,7 @@ API path: `/explore/v2.1/catalog/datasets/sk-stat-56/records`
 
 ### PopulationData
 
-Create an instance: `const population_data = client.population_data`
+Create an instance: `population_data = client.PopulationData`
 
 #### Operations
 
@@ -251,14 +254,16 @@ Create an instance: `const population_data = client.population_data`
 
 #### Example: Load
 
-```ts
-const population_data = await client.population_data.load({ id: 'population_data_id' })
+```ruby
+# load returns the bare PopulationData record (raises on error).
+population_data = client.PopulationData.load({ "id" => "population_data_id" })
 ```
 
 #### Example: List
 
-```ts
-const population_datas = await client.population_data.list()
+```ruby
+# list returns an Array of PopulationData records (raises on error).
+population_datas = client.PopulationData.list
 ```
 
 
@@ -333,7 +338,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-populationdata = client.populationdata
+populationdata = client.PopulationData
 populationdata.load({ "id" => "example_id" })
 
 # populationdata.data_get now returns the loaded populationdata data

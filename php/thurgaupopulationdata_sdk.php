@@ -233,10 +233,10 @@ class ThurgauPopulationDataSDK
 
     private $_population_data = null;
 
-    // Idiomatic facade: $client->population_data()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias PopulationData() (PHP method
-    // names are case-insensitive).
-    public function population_data($data = null)
+    // Canonical facade: $client->PopulationData()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->population_data()
+    // resolves here too.
+    public function PopulationData($data = null)
     {
         require_once __DIR__ . '/entity/population_data_entity.php';
         if ($data === null) {

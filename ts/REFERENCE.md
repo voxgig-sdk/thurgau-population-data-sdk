@@ -109,7 +109,7 @@ Alias for `ThurgauPopulationDataSDK.test()`.
 ## PopulationDataEntity
 
 ```ts
-const population_data = client.population_data
+const population_data = client.PopulationData()
 ```
 
 ### Fields
@@ -125,7 +125,7 @@ const population_data = client.population_data
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.population_data.list()
+const results = await client.PopulationData().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -133,7 +133,7 @@ const results = await client.population_data.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.population_data.load({ id: 'population_data_id' })
+const result = await client.PopulationData().load({ id: 'population_data_id' })
 ```
 
 ### Common Methods

@@ -26,9 +26,11 @@ import { ThurgauPopulationDataSDK } from '@voxgig-sdk/thurgau-population-data'
 
 const client = new ThurgauPopulationDataSDK()
 
-// List all populationdatas
-const populationdatas = await client.populationdata.list()
-console.log(populationdatas.data)
+// List all populationdatas (returns PopulationData[])
+const populationdatas = await client.PopulationData().list()
+for (const populationdata of populationdatas) {
+  console.log(populationdata)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -83,12 +85,13 @@ from thurgaupopulationdata_sdk import ThurgauPopulationDataSDK
 
 client = ThurgauPopulationDataSDK()
 
-# List all populationdatas
-populationdatas = client.populationdata.list()
-print(populationdatas)
+# List all populationdatas (returns a list, raises on error)
+populationdatas = client.PopulationData().list({})
+for populationdata in populationdatas:
+    print(populationdata)
 
-# Load a specific populationdata
-populationdata = client.populationdata.load({"id": "example_id"})
+# Load a specific populationdata (returns the record, raises on error)
+populationdata = client.PopulationData().load({"id": "example_id"})
 print(populationdata)
 ```
 
@@ -100,12 +103,12 @@ require_once 'thurgaupopulationdata_sdk.php';
 
 $client = new ThurgauPopulationDataSDK();
 
-// List all populationdatas (throws on error)
-$populationdatas = $client->populationdata()->list();
+// List all populationdatas (returns an array; throws on error)
+$populationdatas = $client->PopulationData()->list();
 print_r($populationdatas);
 
-// Load a specific populationdata
-$populationdata = $client->populationdata()->load(["id" => "example_id"]);
+// Load a specific populationdata (returns the bare record; throws on error)
+$populationdata = $client->PopulationData()->load(["id" => "example_id"]);
 print_r($populationdata);
 ```
 
@@ -128,12 +131,12 @@ require_relative "ThurgauPopulationData_sdk"
 
 client = ThurgauPopulationDataSDK.new
 
-# List all populationdatas
-populationdatas = client.populationdata.list
+# List all populationdatas (returns an Array; raises on error)
+populationdatas = client.PopulationData.list
 puts populationdatas
 
-# Load a specific populationdata
-populationdata = client.populationdata.load({ "id" => "example_id" })
+# Load a specific populationdata (returns the bare record; raises on error)
+populationdata = client.PopulationData.load({ "id" => "example_id" })
 puts populationdata
 ```
 
@@ -145,11 +148,11 @@ local sdk = require("thurgau-population-data_sdk")
 local client = sdk.new()
 
 -- List all populationdatas
-local populationdatas, err = client:populationdata():list()
+local populationdatas, err = client:PopulationData():list()
 print(populationdatas)
 
 -- Load a specific populationdata
-local populationdata, err = client:populationdata():load({ id = "example_id" })
+local populationdata, err = client:PopulationData():load({ id = "example_id" })
 print(populationdata)
 ```
 
@@ -162,22 +165,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = ThurgauPopulationDataSDK.test()
-const result = await client.populationdata.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const populationdata = await client.PopulationData().load({ id: 'test01' })
+// populationdata is a bare PopulationData populated with mock data
+console.log(populationdata)
 ```
 
 ### Python
 
 ```python
 client = ThurgauPopulationDataSDK.test()
-result = client.populationdata.load({"id": "test01"})
+populationdata = client.PopulationData().load({"id": "test01"})
+print(populationdata)
 ```
 
 ### PHP
 
 ```php
-$client = ThurgauPopulationDataSDK::test();
-$result = $client->populationdata()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = ThurgauPopulationDataSDK::test([
+    "entity" => ["populationdata" => ["test01" => ["id" => "test01"]]],
+]);
+$populationdata = $client->PopulationData()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -192,15 +200,18 @@ result, err := client.PopulationData(nil).Load(
 ### Ruby
 
 ```ruby
-client = ThurgauPopulationDataSDK.test
-result = client.populationdata.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = ThurgauPopulationDataSDK.test({
+  "entity" => { "populationdata" => { "test01" => { "id" => "test01" } } },
+})
+populationdata = client.PopulationData.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:populationdata():load({ id = "test01" })
+local result, err = client:PopulationData():load({ id = "test01" })
 ```
 
 ## How it works
@@ -248,6 +259,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

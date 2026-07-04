@@ -83,7 +83,7 @@ same parameters as `direct()`.
 ## PopulationDataEntity
 
 ```lua
-local population_data = client:population_data(nil)
+local population_data = client:PopulationData(nil)
 ```
 
 ### Fields
@@ -99,7 +99,7 @@ local population_data = client:population_data(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:population_data():list()
+local results, err = client:PopulationData():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -107,7 +107,7 @@ local results, err = client:population_data():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:population_data():load({ id = "population_data_id" })
+local result, err = client:PopulationData():load({ id = "population_data_id" })
 ```
 
 ### Common Methods

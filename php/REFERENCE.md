@@ -85,7 +85,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## PopulationDataEntity
 
 ```php
-$population_data = $client->population_data();
+$population_data = $client->PopulationData();
 ```
 
 ### Fields
@@ -101,7 +101,7 @@ $population_data = $client->population_data();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->population_data()->list([]);
+$results = $client->PopulationData()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -109,7 +109,7 @@ $results = $client->population_data()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->population_data()->load(["id" => "population_data_id"]);
+$result = $client->PopulationData()->load(["id" => "population_data_id"]);
 ```
 
 ### Common Methods

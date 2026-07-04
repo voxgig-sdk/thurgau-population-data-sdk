@@ -86,7 +86,7 @@ same parameters as `direct()`. Raises on error.
 ## PopulationDataEntity
 
 ```ruby
-population_data = client.population_data
+population_data = client.PopulationData
 ```
 
 ### Fields
@@ -102,7 +102,7 @@ population_data = client.population_data
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.population_data.list(nil)
+results = client.PopulationData.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -110,7 +110,7 @@ results = client.population_data.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.population_data.load({ "id" => "population_data_id" })
+result = client.PopulationData.load({ "id" => "population_data_id" })
 ```
 
 ### Common Methods

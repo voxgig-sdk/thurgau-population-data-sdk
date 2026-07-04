@@ -29,18 +29,16 @@ require_once 'thurgaupopulationdata_sdk.php';
 $client = new ThurgauPopulationDataSDK();
 ```
 
-### 2. List populationdatas
+### 2. List populationdata records
 
 ```php
 try {
-    $result = $client->populationdata()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of PopulationData records — iterate directly.
+    $populationdatas = $client->PopulationData()->list();
+    foreach ($populationdatas as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -49,9 +47,10 @@ try {
 
 ```php
 try {
-    $result = $client->populationdata()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare PopulationData record (throws on error).
+    $populationdata = $client->PopulationData()->load(["id" => "example_id"]);
+    print_r($populationdata);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -97,13 +96,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = ThurgauPopulationDataSDK::test();
+$client = ThurgauPopulationDataSDK::test([
+    "entity" => ["populationdata" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->populationdata()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$populationdata = $client->PopulationData()->load(["id" => "test01"]);
+print_r($populationdata);
 ```
 
 ### Use a custom fetch function
@@ -239,7 +242,7 @@ API path: `/explore/v2.1/catalog/datasets/sk-stat-56/records`
 
 ### PopulationData
 
-Create an instance: `const population_data = client.population_data`
+Create an instance: `$population_data = $client->PopulationData();`
 
 #### Operations
 
@@ -256,14 +259,16 @@ Create an instance: `const population_data = client.population_data`
 
 #### Example: Load
 
-```ts
-const population_data = await client.population_data.load({ id: 'population_data_id' })
+```php
+// load() returns the bare PopulationData record (throws on error).
+$population_data = $client->PopulationData()->load(["id" => "population_data_id"]);
 ```
 
 #### Example: List
 
-```ts
-const population_datas = await client.population_data.list()
+```php
+// list() returns an array of PopulationData records (throws on error).
+$population_datas = $client->PopulationData()->list();
 ```
 
 
@@ -338,7 +343,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$populationdata = $client->populationdata();
+$populationdata = $client->PopulationData();
 $populationdata->load(["id" => "example_id"]);
 
 // $populationdata->dataGet() now returns the loaded populationdata data

@@ -208,13 +208,7 @@ class ThurgauPopulationDataSDK
   end
 
 
-  # Idiomatic facade: client.population_data.list / client.population_data.load({ "id" => ... })
-  def population_data
-    require_relative 'entity/population_data_entity'
-    @population_data ||= PopulationDataEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.population_data instead.
+  # Canonical facade: client.PopulationData.list / client.PopulationData.load({ "id" => ... })
   def PopulationData(data = nil)
     require_relative 'entity/population_data_entity'
     PopulationDataEntity.new(self, data)

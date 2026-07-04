@@ -31,26 +31,26 @@ local sdk = require("thurgau-population-data_sdk")
 local client = sdk.new()
 ```
 
-### 2. List populationdatas
+### 2. List populationdata records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:populationdata():list()
+local populationdatas, err = client:PopulationData():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(populationdatas) do
+  print(item["id"], item["name"])
 end
 ```
 
 ### 3. Load a populationdata
 
 ```lua
-local result, err = client:populationdata():load({ id = "example_id" })
+local populationdata, err = client:PopulationData():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(populationdata)
 ```
 
 
@@ -96,8 +96,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:populationdata():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:PopulationData():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -197,17 +197,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local population_data, err = client:PopulationData():load({ id = "example_id" })
+    if err then error(err) end
+    -- population_data is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -228,7 +233,7 @@ API path: `/explore/v2.1/catalog/datasets/sk-stat-56/records`
 
 ### PopulationData
 
-Create an instance: `const population_data = client.population_data`
+Create an instance: `local population_data = client:PopulationData(nil)`
 
 #### Operations
 
@@ -245,14 +250,14 @@ Create an instance: `const population_data = client.population_data`
 
 #### Example: Load
 
-```ts
-const population_data = await client.population_data.load({ id: 'population_data_id' })
+```lua
+local population_data, err = client:PopulationData():load({ id = "population_data_id" })
 ```
 
 #### Example: List
 
-```ts
-const population_datas = await client.population_data.list()
+```lua
+local population_datas, err = client:PopulationData():list()
 ```
 
 
@@ -327,7 +332,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local populationdata = client:populationdata()
+local populationdata = client:PopulationData()
 populationdata:load({ id = "example_id" })
 
 -- populationdata:data_get() now returns the loaded populationdata data

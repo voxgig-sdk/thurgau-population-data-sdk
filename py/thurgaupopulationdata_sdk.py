@@ -220,25 +220,15 @@ class ThurgauPopulationDataSDK:
         }
 
 
-    @property
-    def population_data(self):
-        """Idiomatic facade: client.population_data.list() / client.population_data.load({"id": ...})."""
-        from entity.population_data_entity import PopulationDataEntity
-        cached = getattr(self, "_population_data", None)
-        if cached is None:
-            cached = PopulationDataEntity(self, None)
-            self._population_data = cached
-        return cached
-
-    def PopulationData(self, data=None):
-        # Deprecated: use client.population_data instead.
+    def PopulationData(self, data=None) -> "PopulationDataEntity":
+        """Entity factory: client.PopulationData().list({}) / client.PopulationData().load({"id": ...})."""
         from entity.population_data_entity import PopulationDataEntity
         return PopulationDataEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "ThurgauPopulationDataSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -258,3 +248,9 @@ class ThurgauPopulationDataSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.population_data_entity import PopulationDataEntity

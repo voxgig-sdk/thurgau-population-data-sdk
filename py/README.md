@@ -31,24 +31,28 @@ from thurgaupopulationdata_sdk import ThurgauPopulationDataSDK
 client = ThurgauPopulationDataSDK()
 ```
 
-### 2. List populationdatas
+### 2. List populationdata records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.populationdata.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    populationdatas = client.PopulationData().list({})
+    for populationdata in populationdatas:
+        print(populationdata)
 except Exception as err:
     print(f"list failed: {err}")
 ```
 
 ### 3. Load a populationdata
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.populationdata.load({"id": "example_id"})
-    print(result)
+    populationdata = client.PopulationData().load({"id": "example_id"})
+    print(populationdata)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -96,8 +100,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = ThurgauPopulationDataSDK.test()
 
-result = client.populationdata.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+populationdata = client.PopulationData().load({"id": "test01"})
+# populationdata contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -230,7 +235,7 @@ API path: `/explore/v2.1/catalog/datasets/sk-stat-56/records`
 
 ### PopulationData
 
-Create an instance: `const population_data = client.population_data`
+Create an instance: `population_data = client.PopulationData()`
 
 #### Operations
 
@@ -247,14 +252,14 @@ Create an instance: `const population_data = client.population_data`
 
 #### Example: Load
 
-```ts
-const population_data = await client.population_data.load({ id: 'population_data_id' })
+```python
+population_data = client.PopulationData().load({"id": "population_data_id"})
 ```
 
 #### Example: List
 
-```ts
-const population_datas = await client.population_data.list()
+```python
+population_datas = client.PopulationData().list({})
 ```
 
 
@@ -328,7 +333,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-populationdata = client.populationdata
+populationdata = client.PopulationData()
 populationdata.load({"id": "example_id"})
 
 # populationdata.data_get() now returns the loaded populationdata data

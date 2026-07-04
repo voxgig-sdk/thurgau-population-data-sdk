@@ -80,7 +80,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## PopulationDataEntity
 
 ```python
-population_data = client.population_data
+population_data = client.PopulationData()
 ```
 
 ### Fields
@@ -96,7 +96,9 @@ population_data = client.population_data
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.population_data.list({})
+results = client.PopulationData().list({})
+for population_data in results:
+    print(population_data)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -104,7 +106,7 @@ results = client.population_data.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.population_data.load({"id": "population_data_id"})
+result = client.PopulationData().load({"id": "population_data_id"})
 ```
 
 ### Common Methods
