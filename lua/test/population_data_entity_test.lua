@@ -98,7 +98,6 @@ function population_data_basic_setup(extra)
     ["THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID"] = idmap,
     ["THURGAUPOPULATIONDATA_TEST_LIVE"] = "FALSE",
     ["THURGAUPOPULATIONDATA_TEST_EXPLAIN"] = "FALSE",
-    ["THURGAUPOPULATIONDATA_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -110,7 +109,6 @@ function population_data_basic_setup(extra)
   if env["THURGAUPOPULATIONDATA_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["THURGAUPOPULATIONDATA_APIKEY"],
       },
       extra or {},
     })

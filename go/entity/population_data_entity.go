@@ -85,6 +85,27 @@ func (e *PopulationDataEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an PopulationData; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *PopulationDataEntity) DataTyped(data ...PopulationData) PopulationData {
+	if len(data) > 0 {
+		return typedFrom[PopulationData](e.Data(asMap(data[0])))
+	}
+	return typedFrom[PopulationData](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through PopulationData (all fields
+// optional at the wire level).
+func (e *PopulationDataEntity) MatchTyped(match ...PopulationData) PopulationData {
+	if len(match) > 0 {
+		return typedFrom[PopulationData](e.Match(asMap(match[0])))
+	}
+	return typedFrom[PopulationData](e.Match())
+}
+
 
 func (e *PopulationDataEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -111,6 +132,17 @@ func (e *PopulationDataEntity) Load(reqmatch map[string]any, ctrl map[string]any
 	})
 }
 
+// LoadTyped is the statically-typed variant of Load: it takes an
+// PopulationDataLoadMatch and returns an PopulationData. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *PopulationDataEntity) LoadTyped(reqmatch PopulationDataLoadMatch, ctrl map[string]any) (PopulationData, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return PopulationData{}, err
+	}
+	return typedFrom[PopulationData](res), nil
+}
+
 
 
 
@@ -131,6 +163,17 @@ func (e *PopulationDataEntity) List(reqmatch map[string]any, ctrl map[string]any
 			}
 		}
 	})
+}
+
+// ListTyped is the statically-typed variant of List: it takes an
+// PopulationDataListMatch and returns []PopulationData. It delegates to the untyped
+// List (identical runtime) and converts at the typed boundary.
+func (e *PopulationDataEntity) ListTyped(reqmatch PopulationDataListMatch, ctrl map[string]any) ([]PopulationData, error) {
+	res, err := e.List(asMap(reqmatch), ctrl)
+	if err != nil {
+		return nil, err
+	}
+	return typedSliceFrom[PopulationData](res), nil
 }
 
 

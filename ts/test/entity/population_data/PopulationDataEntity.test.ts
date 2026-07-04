@@ -119,7 +119,6 @@ function basicSetup(extra?: any) {
     'THURGAU_POPULATION_DATA_TEST_POPULATION_DATA_ENTID': idmap,
     'THURGAU_POPULATION_DATA_TEST_LIVE': 'FALSE',
     'THURGAU_POPULATION_DATA_TEST_EXPLAIN': 'FALSE',
-    'THURGAU_POPULATION_DATA_APIKEY': 'NONE',
   })
 
   idmap = env['THURGAU_POPULATION_DATA_TEST_POPULATION_DATA_ENTID']
@@ -129,7 +128,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new ThurgauPopulationDataSDK(merge([
       {
-        apikey: env.THURGAU_POPULATION_DATA_APIKEY,
       },
       extra
     ]))

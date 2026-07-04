@@ -43,14 +43,12 @@ class PopulationDataEntityTest < Minitest::Test
     population_data_ref01_ent = client.PopulationData(nil)
     population_data_ref01_match = {}
 
-    population_data_ref01_list_result, err = population_data_ref01_ent.list(population_data_ref01_match, nil)
-    assert_nil err
+    population_data_ref01_list_result = population_data_ref01_ent.list(population_data_ref01_match, nil)
     assert population_data_ref01_list_result.is_a?(Array)
 
     # LOAD
     population_data_ref01_match_dt0 = {}
-    population_data_ref01_data_dt0_loaded, err = population_data_ref01_ent.load(population_data_ref01_match_dt0, nil)
-    assert_nil err
+    population_data_ref01_data_dt0_loaded = population_data_ref01_ent.load(population_data_ref01_match_dt0, nil)
     assert !population_data_ref01_data_dt0_loaded.nil?
 
   end
@@ -89,7 +87,6 @@ def population_data_basic_setup(extra)
     "THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID" => idmap,
     "THURGAUPOPULATIONDATA_TEST_LIVE" => "FALSE",
     "THURGAUPOPULATIONDATA_TEST_EXPLAIN" => "FALSE",
-    "THURGAUPOPULATIONDATA_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -101,7 +98,6 @@ def population_data_basic_setup(extra)
   if env["THURGAUPOPULATIONDATA_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["THURGAUPOPULATIONDATA_APIKEY"],
       },
       extra || {},
     ])

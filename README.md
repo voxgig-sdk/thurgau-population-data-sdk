@@ -10,26 +10,24 @@ This is an unofficial SDK for the Thurgau Population Data public API, generated 
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/thurgau-population-data` | `npm install @voxgig-sdk/thurgau-population-data` |
-| Python | `voxgig-sdk-thurgau-population-data` | `pip install voxgig-sdk-thurgau-population-data` |
-| PHP | `voxgig-sdk/thurgau-population-data` | `composer require voxgig-sdk/thurgau-population-data` |
-| Golang | `github.com/voxgig-sdk/thurgau-population-data-sdk/go` | `go get github.com/voxgig-sdk/thurgau-population-data-sdk/go` |
-| Ruby | `voxgig-sdk-thurgau-population-data` | `gem install voxgig-sdk-thurgau-population-data` |
-| Lua | `voxgig-sdk-thurgau-population-data` | `luarocks install voxgig-sdk-thurgau-population-data` |
+| TypeScript | `@voxgig-sdk/thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
+| Python | `voxgig-sdk-thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
+| PHP | `voxgig-sdk/thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
+| Golang | `github.com/voxgig-sdk/thurgau-population-data-sdk/go` | `go get github.com/voxgig-sdk/thurgau-population-data-sdk/go@latest` |
+| Ruby | `voxgig-sdk-thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
+| Lua | `voxgig-sdk-thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
 
 ## Quickstart
 
 ### TypeScript
 
 ```ts
-import { ThurgauPopulationDataSDK } from 'thurgau-population-data'
+import { ThurgauPopulationDataSDK } from '@voxgig-sdk/thurgau-population-data'
 
-const client = new ThurgauPopulationDataSDK({
-  apikey: process.env.THURGAU-POPULATION-DATA_APIKEY,
-})
+const client = new ThurgauPopulationDataSDK()
 
 // List all populationdatas
-const populationdatas = await client.PopulationData().list()
+const populationdatas = await client.populationdata.list()
 console.log(populationdatas.data)
 ```
 
@@ -71,7 +69,7 @@ The API exposes one entity:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **PopulationData** |  | `/explore/v2.1/catalog/datasets/sk-stat-56/records` |
+| **PopulationData** | The PopulationData entity (list, load). | `/explore/v2.1/catalog/datasets/sk-stat-56/records` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -81,19 +79,16 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
-import os
 from thurgaupopulationdata_sdk import ThurgauPopulationDataSDK
 
-client = ThurgauPopulationDataSDK({
-    "apikey": os.environ.get("THURGAU-POPULATION-DATA_APIKEY"),
-})
+client = ThurgauPopulationDataSDK()
 
 # List all populationdatas
-populationdatas, err = client.PopulationData().list()
+populationdatas = client.populationdata.list()
 print(populationdatas)
 
 # Load a specific populationdata
-populationdata, err = client.PopulationData().load({"id": "example_id"})
+populationdata = client.populationdata.load({"id": "example_id"})
 print(populationdata)
 ```
 
@@ -103,16 +98,14 @@ print(populationdata)
 <?php
 require_once 'thurgaupopulationdata_sdk.php';
 
-$client = new ThurgauPopulationDataSDK([
-    "apikey" => getenv("THURGAU-POPULATION-DATA_APIKEY"),
-]);
+$client = new ThurgauPopulationDataSDK();
 
-// List all populationdatas
-[$populationdatas, $err] = $client->PopulationData()->list();
+// List all populationdatas (throws on error)
+$populationdatas = $client->populationdata()->list();
 print_r($populationdatas);
 
 // Load a specific populationdata
-[$populationdata, $err] = $client->PopulationData()->load(["id" => "example_id"]);
+$populationdata = $client->populationdata()->load(["id" => "example_id"]);
 print_r($populationdata);
 ```
 
@@ -121,9 +114,7 @@ print_r($populationdata);
 ```go
 import sdk "github.com/voxgig-sdk/thurgau-population-data-sdk/go"
 
-client := sdk.NewThurgauPopulationDataSDK(map[string]any{
-    "apikey": os.Getenv("THURGAU-POPULATION-DATA_APIKEY"),
-})
+client := sdk.New()
 
 // List all populationdatas
 populationdatas, err := client.PopulationData(nil).List(nil, nil)
@@ -135,16 +126,14 @@ fmt.Println(populationdatas)
 ```ruby
 require_relative "ThurgauPopulationData_sdk"
 
-client = ThurgauPopulationDataSDK.new({
-  "apikey" => ENV["THURGAU-POPULATION-DATA_APIKEY"],
-})
+client = ThurgauPopulationDataSDK.new
 
 # List all populationdatas
-populationdatas, err = client.PopulationData().list
+populationdatas = client.populationdata.list
 puts populationdatas
 
 # Load a specific populationdata
-populationdata, err = client.PopulationData().load({ "id" => "example_id" })
+populationdata = client.populationdata.load({ "id" => "example_id" })
 puts populationdata
 ```
 
@@ -153,16 +142,14 @@ puts populationdata
 ```lua
 local sdk = require("thurgau-population-data_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("THURGAU-POPULATION-DATA_APIKEY"),
-})
+local client = sdk.new()
 
 -- List all populationdatas
-local populationdatas, err = client:PopulationData():list()
+local populationdatas, err = client:populationdata():list()
 print(populationdatas)
 
 -- Load a specific populationdata
-local populationdata, err = client:PopulationData():load({ id = "example_id" })
+local populationdata, err = client:populationdata():load({ id = "example_id" })
 print(populationdata)
 ```
 
@@ -175,7 +162,7 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = ThurgauPopulationDataSDK.test()
-const result = await client.PopulationData().load({ id: 'test01' })
+const result = await client.populationdata.load({ id: 'test01' })
 // result.ok === true, result.data contains mock data
 ```
 
@@ -183,14 +170,14 @@ const result = await client.PopulationData().load({ id: 'test01' })
 
 ```python
 client = ThurgauPopulationDataSDK.test()
-result, err = client.PopulationData().load({"id": "test01"})
+result = client.populationdata.load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
 $client = ThurgauPopulationDataSDK::test();
-[$result, $err] = $client->PopulationData()->load(["id" => "test01"]);
+$result = $client->populationdata()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -206,14 +193,14 @@ result, err := client.PopulationData(nil).Load(
 
 ```ruby
 client = ThurgauPopulationDataSDK.test
-result, err = client.PopulationData().load({ "id" => "test01" })
+result = client.populationdata.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:PopulationData():load({ id = "test01" })
+local result, err = client:populationdata():load({ id = "test01" })
 ```
 
 ## How it works
@@ -266,7 +253,7 @@ console.log(result.data)
 
 **Python:**
 ```python
-result, err = client.direct({
+result = client.direct({
     "path": "/api/resource/{id}",
     "method": "GET",
     "params": {"id": "example"},
@@ -275,7 +262,7 @@ result, err = client.direct({
 
 **PHP:**
 ```php
-[$result, $err] = $client->direct([
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
@@ -293,7 +280,7 @@ result, err := client.Direct(map[string]any{
 
 **Ruby:**
 ```ruby
-result, err = client.direct({
+result = client.direct({
   "path" => "/api/resource/{id}",
   "method" => "GET",
   "params" => { "id" => "example" },

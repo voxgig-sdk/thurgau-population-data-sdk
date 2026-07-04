@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch PopulationDataLoadMatch
+---@param ctrl? table
+---@return PopulationData
+---@return string? err
 function PopulationDataEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch PopulationDataListMatch
+---@param ctrl? table
+---@return PopulationData[]
+---@return string? err
 function PopulationDataEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

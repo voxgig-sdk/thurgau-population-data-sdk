@@ -245,6 +245,9 @@ func (sdk *ThurgauPopulationDataSDK) Direct(fetchargs map[string]any) (map[strin
 }
 
 
+// PopulationData returns a PopulationData entity bound to this client.
+// Idiomatic usage: client.PopulationData(nil).List(nil, nil) or
+// client.PopulationData(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ThurgauPopulationDataSDK) PopulationData(data map[string]any) ThurgauPopulationDataEntity {
 	return NewPopulationDataEntityFunc(sdk, data)
 }

@@ -9,12 +9,9 @@ The Lua SDK for the ThurgauPopulationData API — an entity-oriented client usin
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-thurgau-population-data
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("thurgau-population-data_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("THURGAU-POPULATION-DATA_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 2. List populationdatas
 
 ```lua
-local result, err = client:PopulationData():list()
+local result, err = client:populationdata():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -53,7 +48,7 @@ end
 ### 3. Load a populationdata
 
 ```lua
-local result, err = client:PopulationData():load({ id = "example_id" })
+local result, err = client:populationdata():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -101,7 +96,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:ThurgauPopulationData():load({ id = "test01" })
+local result, err = client:populationdata():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -134,8 +129,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-THURGAU-POPULATION-DATA_TEST_LIVE=TRUE
-THURGAU-POPULATION-DATA_APIKEY=<your-key>
+THURGAU_POPULATION_DATA_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -158,7 +152,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -235,7 +228,7 @@ API path: `/explore/v2.1/catalog/datasets/sk-stat-56/records`
 
 ### PopulationData
 
-Create an instance: `const population_data = client.PopulationData()`
+Create an instance: `const population_data = client.population_data`
 
 #### Operations
 
@@ -253,13 +246,13 @@ Create an instance: `const population_data = client.PopulationData()`
 #### Example: Load
 
 ```ts
-const population_data = await client.PopulationData().load({ id: 'population_data_id' })
+const population_data = await client.population_data.load({ id: 'population_data_id' })
 ```
 
 #### Example: List
 
 ```ts
-const population_datas = await client.PopulationData().list()
+const population_datas = await client.population_data.list()
 ```
 
 
@@ -334,11 +327,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local populationdata = client:populationdata()
+populationdata:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- populationdata:data_get() now returns the loaded populationdata data
+-- populationdata:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

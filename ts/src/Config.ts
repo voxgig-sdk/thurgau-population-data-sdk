@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://data.tg.ch/api',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },

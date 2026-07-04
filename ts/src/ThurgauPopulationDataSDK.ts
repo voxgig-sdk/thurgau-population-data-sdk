@@ -2,6 +2,8 @@
 
 import { PopulationDataEntity } from './entity/PopulationDataEntity'
 
+export type * from './ThurgauPopulationDataTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -202,6 +204,14 @@ class ThurgauPopulationDataSDK {
 
 
 
+  _population_data?: PopulationDataEntity
+
+  // Idiomatic facade: `client.population_data.list()` / `client.population_data.load({ id })`.
+  get population_data(): PopulationDataEntity {
+    return (this._population_data ??= new PopulationDataEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.population_data` instead. */
   PopulationData(data?: any) {
     const self = this
     return new PopulationDataEntity(self,data)

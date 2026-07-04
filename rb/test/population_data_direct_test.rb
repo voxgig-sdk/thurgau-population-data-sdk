@@ -19,7 +19,7 @@ class PopulationDataDirectTest < Minitest::Test
     client = setup[:client]
 
 
-    result, err = client.direct({
+    result = client.direct({
       "path" => "explore/v2.1/catalog/datasets/sk-stat-56/records",
       "method" => "GET",
       "params" => {},
@@ -28,8 +28,8 @@ class PopulationDataDirectTest < Minitest::Test
       # Live mode is lenient: synthetic IDs frequently 4xx and the list-
       # response shape varies wildly across public APIs. Skip rather than
       # fail when the call doesn't return a usable list.
-      if !err.nil?
-        skip("list call failed (likely synthetic IDs against live API): #{err}")
+      if !result["err"].nil?
+        skip("list call failed (likely synthetic IDs against live API): #{result["err"]}")
         return
       end
       unless result["ok"]
@@ -42,7 +42,7 @@ class PopulationDataDirectTest < Minitest::Test
         return
       end
     else
-      assert_nil err
+      assert_nil result["err"]
       assert result["ok"]
       assert_equal 200, Helpers.to_int(result["status"])
       assert result["data"].is_a?(Array)
@@ -61,7 +61,7 @@ class PopulationDataDirectTest < Minitest::Test
     client = setup[:client]
 
 
-    result, err = client.direct({
+    result = client.direct({
       "path" => "explore/v2.1/catalog/datasets/sk-stat-56/exports/csv",
       "method" => "GET",
       "params" => {},
@@ -70,8 +70,8 @@ class PopulationDataDirectTest < Minitest::Test
       # Live mode is lenient: synthetic IDs frequently 4xx. Skip rather
       # than fail when the load endpoint isn't reachable with the IDs
       # we can construct from setup.idmap.
-      if !err.nil?
-        skip("load call failed (likely synthetic IDs against live API): #{err}")
+      if !result["err"].nil?
+        skip("load call failed (likely synthetic IDs against live API): #{result["err"]}")
         return
       end
       unless result["ok"]
@@ -84,7 +84,7 @@ class PopulationDataDirectTest < Minitest::Test
         return
       end
     else
-      assert_nil err
+      assert_nil result["err"]
       assert result["ok"]
       assert_equal 200, Helpers.to_int(result["status"])
       assert !result["data"].nil?
@@ -106,14 +106,12 @@ def population_data_direct_setup(mockres)
   env = Runner.env_override({
     "THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID" => {},
     "THURGAUPOPULATIONDATA_TEST_LIVE" => "FALSE",
-    "THURGAUPOPULATIONDATA_APIKEY" => "NONE",
   })
 
   live = env["THURGAUPOPULATIONDATA_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["THURGAUPOPULATIONDATA_APIKEY"],
     }
     client = ThurgauPopulationDataSDK.new(merged_opts)
     return {

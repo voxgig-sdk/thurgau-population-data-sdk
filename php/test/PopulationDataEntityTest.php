@@ -50,14 +50,12 @@ class PopulationDataEntityTest extends TestCase
         $population_data_ref01_ent = $client->PopulationData(null);
         $population_data_ref01_match = [];
 
-        [$population_data_ref01_list_result, $err] = $population_data_ref01_ent->list($population_data_ref01_match, null);
-        $this->assertNull($err);
+        $population_data_ref01_list_result = $population_data_ref01_ent->list($population_data_ref01_match, null);
         $this->assertIsArray($population_data_ref01_list_result);
 
         // LOAD
         $population_data_ref01_match_dt0 = [];
-        [$population_data_ref01_data_dt0_loaded, $err] = $population_data_ref01_ent->load($population_data_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $population_data_ref01_data_dt0_loaded = $population_data_ref01_ent->load($population_data_ref01_match_dt0, null);
         $this->assertNotNull($population_data_ref01_data_dt0_loaded);
 
     }
@@ -92,7 +90,6 @@ function population_data_basic_setup($extra)
         "THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID" => $idmap,
         "THURGAUPOPULATIONDATA_TEST_LIVE" => "FALSE",
         "THURGAUPOPULATIONDATA_TEST_EXPLAIN" => "FALSE",
-        "THURGAUPOPULATIONDATA_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -104,7 +101,6 @@ function population_data_basic_setup($extra)
     if ($env["THURGAUPOPULATIONDATA_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["THURGAUPOPULATIONDATA_APIKEY"],
             ],
             $extra ?? [],
         ]);

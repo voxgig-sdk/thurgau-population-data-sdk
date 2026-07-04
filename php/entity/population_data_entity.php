@@ -55,6 +55,9 @@ class PopulationDataEntity
         return new PopulationDataEntity($this->_client, $opts);
     }
 
+    /**
+     * @param PopulationData|array $args PopulationData data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class PopulationDataEntity
         }
     }
 
+    /**
+     * @return PopulationData|array The current PopulationData data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of PopulationData fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class PopulationDataEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of PopulationData fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class PopulationDataEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single PopulationData.
+     *
+     * @param PopulationDataLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed PopulationDataLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return PopulationData|array The loaded PopulationData as an assoc-array at the
+     *   SDK boundary; throws ThurgauPopulationDataError on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -110,7 +131,16 @@ class PopulationDataEntity
 
 
     
-    public function list($reqmatch, $ctrl = null): array
+    /**
+     * List PopulationData items matching the given filter.
+     *
+     * @param PopulationDataListMatch|array|null $reqmatch Match filter (any subset
+     *   of PopulationData fields) as an assoc-array; PopulationDataListMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return PopulationData[]|array A list of PopulationData items as assoc-arrays at
+     *   the SDK boundary; throws ThurgauPopulationDataError on failure (item-5 convention).
+     */
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -138,7 +168,7 @@ class PopulationDataEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

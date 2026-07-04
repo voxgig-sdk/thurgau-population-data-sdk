@@ -45,6 +45,7 @@ class PopulationDataEntity
     end
   end
 
+  # @return [PopulationData, Hash] the current PopulationData data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class PopulationDataEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of PopulationData fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single PopulationData.
+  #
+  # @param reqmatch [PopulationDataLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [PopulationData, Hash] the loaded PopulationData; raises ThurgauPopulationDataError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class PopulationDataEntity
 
 
   
+  # List PopulationData items matching the given filter.
+  #
+  # @param reqmatch [PopulationDataListMatch, Hash, nil] match filter (any subset of PopulationData fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<PopulationData>, Array] the matching PopulationData items; raises ThurgauPopulationDataError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

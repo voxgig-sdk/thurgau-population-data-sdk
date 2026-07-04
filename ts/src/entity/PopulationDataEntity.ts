@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  PopulationData,
+  PopulationDataLoadMatch,
+  PopulationDataListMatch,
+} from '../ThurgauPopulationDataTypes'
 
 // TODO: needs Entity superclass
-class PopulationDataEntity extends ThurgauPopulationDataEntityBase {
+class PopulationDataEntity extends ThurgauPopulationDataEntityBase<PopulationData> {
 
   constructor(client: ThurgauPopulationDataSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class PopulationDataEntity extends ThurgauPopulationDataEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: PopulationDataLoadMatch, ctrl?: Control): Promise<PopulationData> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class PopulationDataEntity extends ThurgauPopulationDataEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<PopulationData> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: PopulationDataListMatch, ctrl?: Control): Promise<PopulationData[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class PopulationDataEntity extends ThurgauPopulationDataEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<PopulationData[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

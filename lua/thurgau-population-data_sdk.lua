@@ -244,6 +244,19 @@ end
 
 
 
+-- Idiomatic facade: client:population_data():list() / client:population_data():load({ id = ... })
+function ThurgauPopulationDataSDK:population_data(data)
+  local EntityMod = require("entity.population_data_entity")
+  if data == nil then
+    if self._population_data == nil then
+      self._population_data = EntityMod.new(self, nil)
+    end
+    return self._population_data
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:population_data() instead.
 function ThurgauPopulationDataSDK:PopulationData(data)
   local EntityMod = require("entity.population_data_entity")
   return EntityMod.new(self, data)

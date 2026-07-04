@@ -9,9 +9,10 @@ The PHP SDK for the ThurgauPopulationData API — an entity-oriented client usin
 
 
 ## Install
-```bash
-composer require voxgig-sdk/thurgau-population-data
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -25,31 +26,34 @@ loading a specific record.
 <?php
 require_once 'thurgaupopulationdata_sdk.php';
 
-$client = new ThurgauPopulationDataSDK([
-    "apikey" => getenv("THURGAU-POPULATION-DATA_APIKEY"),
-]);
+$client = new ThurgauPopulationDataSDK();
 ```
 
 ### 2. List populationdatas
 
 ```php
-[$result, $err] = $client->PopulationData()->list();
-if ($err) { throw new \Exception($err); }
-
-if (is_array($result)) {
-    foreach ($result as $item) {
-        $d = $item->data_get();
-        echo $d["id"] . " " . $d["name"] . "\n";
+try {
+    $result = $client->populationdata()->list();
+    if (is_array($result)) {
+        foreach ($result as $item) {
+            $d = $item->data_get();
+            echo $d["id"] . " " . $d["name"] . "\n";
+        }
     }
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
 }
 ```
 
 ### 3. Load a populationdata
 
 ```php
-[$result, $err] = $client->PopulationData()->load(["id" => "example_id"]);
-if ($err) { throw new \Exception($err); }
-print_r($result);
+try {
+    $result = $client->populationdata()->load(["id" => "example_id"]);
+    print_r($result);
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
+}
 ```
 
 
@@ -60,28 +64,31 @@ print_r($result);
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -95,7 +102,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = ThurgauPopulationDataSDK::test();
 
-[$result, $err] = $client->ThurgauPopulationData()->load(["id" => "test01"]);
+$result = $client->populationdata()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -129,8 +136,7 @@ $client = new ThurgauPopulationDataSDK([
 Create a `.env.local` file at the project root:
 
 ```
-THURGAU-POPULATION-DATA_TEST_LIVE=TRUE
-THURGAU-POPULATION-DATA_APIKEY=<your-key>
+THURGAU_POPULATION_DATA_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -153,7 +159,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -199,8 +204,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -230,7 +239,7 @@ API path: `/explore/v2.1/catalog/datasets/sk-stat-56/records`
 
 ### PopulationData
 
-Create an instance: `const population_data = client.PopulationData()`
+Create an instance: `const population_data = client.population_data`
 
 #### Operations
 
@@ -248,13 +257,13 @@ Create an instance: `const population_data = client.PopulationData()`
 #### Example: Load
 
 ```ts
-const population_data = await client.PopulationData().load({ id: 'population_data_id' })
+const population_data = await client.population_data.load({ id: 'population_data_id' })
 ```
 
 #### Example: List
 
 ```ts
-const population_datas = await client.PopulationData().list()
+const population_datas = await client.population_data.list()
 ```
 
 
@@ -329,11 +338,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$populationdata = $client->populationdata();
+$populationdata->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $populationdata->dataGet() now returns the loaded populationdata data
+// $populationdata->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

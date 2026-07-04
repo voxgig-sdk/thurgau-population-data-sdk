@@ -50,14 +50,12 @@ class TestPopulationDataEntity:
         population_data_ref01_ent = client.PopulationData(None)
         population_data_ref01_match = {}
 
-        population_data_ref01_list_result, err = population_data_ref01_ent.list(population_data_ref01_match, None)
-        assert err is None
+        population_data_ref01_list_result = population_data_ref01_ent.list(population_data_ref01_match, None)
         assert isinstance(population_data_ref01_list_result, list)
 
         # LOAD
         population_data_ref01_match_dt0 = {}
-        population_data_ref01_data_dt0_loaded, err = population_data_ref01_ent.load(population_data_ref01_match_dt0, None)
-        assert err is None
+        population_data_ref01_data_dt0_loaded = population_data_ref01_ent.load(population_data_ref01_match_dt0, None)
         assert population_data_ref01_data_dt0_loaded is not None
 
 
@@ -98,7 +96,6 @@ def _population_data_basic_setup(extra):
         "THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID": idmap,
         "THURGAUPOPULATIONDATA_TEST_LIVE": "FALSE",
         "THURGAUPOPULATIONDATA_TEST_EXPLAIN": "FALSE",
-        "THURGAUPOPULATIONDATA_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -109,7 +106,6 @@ def _population_data_basic_setup(extra):
     if env.get("THURGAUPOPULATIONDATA_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("THURGAUPOPULATIONDATA_APIKEY"),
             },
             extra or {},
         ])
