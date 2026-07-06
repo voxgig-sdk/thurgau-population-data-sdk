@@ -17,7 +17,7 @@ PopulationData = Struct.new(
   keyword_init: true
 )
 
-# Match filter for PopulationData#load (any subset of PopulationData fields).
+# Request payload for PopulationData#load.
 #
 # @!attribute [rw] record
 #   @return [Hash, nil]
@@ -26,7 +26,7 @@ PopulationDataLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for PopulationData#list (any subset of PopulationData fields).
+# Request payload for PopulationData#list.
 #
 # @!attribute [rw] record
 #   @return [Hash, nil]

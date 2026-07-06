@@ -221,7 +221,7 @@ class ThurgauPopulationDataSDK:
 
 
     def PopulationData(self, data=None) -> "PopulationDataEntity":
-        """Entity factory: client.PopulationData().list({}) / client.PopulationData().load({"id": ...})."""
+        """Entity factory: client.PopulationData().list() / client.PopulationData().load({"id": ...})."""
         from entity.population_data_entity import PopulationDataEntity
         return PopulationDataEntity(self, data)
 

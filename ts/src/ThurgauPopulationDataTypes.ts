@@ -9,7 +9,11 @@ export interface PopulationData {
   record?: Record<string, any>
 }
 
-export type PopulationDataLoadMatch = Partial<PopulationData>
+export interface PopulationDataLoadMatch {
+  record?: Record<string, any>
+}
 
-export type PopulationDataListMatch = Partial<PopulationData>
+export interface PopulationDataListMatch {
+  record?: Record<string, any>
+}
 

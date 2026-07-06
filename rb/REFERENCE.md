@@ -8,7 +8,7 @@ Complete API reference for the ThurgauPopulationData Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'thurgau-population-data_sdk'
+require_relative 'ThurgauPopulationData_sdk'
 
 client = ThurgauPopulationDataSDK.new(options)
 ```
@@ -93,16 +93,16 @@ population_data = client.PopulationData
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | ``$OBJECT`` | No |  |
+| `record` | `Hash` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.PopulationData.list(nil)
+results = client.PopulationData.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -110,7 +110,7 @@ results = client.PopulationData.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.PopulationData.load({ "id" => "population_data_id" })
+result = client.PopulationData.load()
 ```
 
 ### Common Methods

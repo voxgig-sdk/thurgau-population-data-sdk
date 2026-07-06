@@ -13,14 +13,12 @@ type PopulationData struct {
 	Record *map[string]any `json:"record,omitempty"`
 }
 
-// PopulationDataLoadMatch mirrors the population_data fields as an all-optional match
-// filter (Go analog of Partial<PopulationData>).
+// PopulationDataLoadMatch is the typed request payload for PopulationData.LoadTyped.
 type PopulationDataLoadMatch struct {
 	Record *map[string]any `json:"record,omitempty"`
 }
 
-// PopulationDataListMatch mirrors the population_data fields as an all-optional match
-// filter (Go analog of Partial<PopulationData>).
+// PopulationDataListMatch is the typed request payload for PopulationData.ListTyped.
 type PopulationDataListMatch struct {
 	Record *map[string]any `json:"record,omitempty"`
 }

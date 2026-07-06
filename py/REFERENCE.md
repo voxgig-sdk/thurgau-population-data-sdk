@@ -8,7 +8,7 @@ Complete API reference for the ThurgauPopulationData Python SDK.
 ### Constructor
 
 ```python
-from thurgau-population-data_sdk import ThurgauPopulationDataSDK
+from thurgaupopulationdata_sdk import ThurgauPopulationDataSDK
 
 client = ThurgauPopulationDataSDK(options)
 ```
@@ -87,16 +87,16 @@ population_data = client.PopulationData()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | ``$OBJECT`` | No |  |
+| `record` | `dict` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.PopulationData().list({})
+results = client.PopulationData().list()
 for population_data in results:
     print(population_data)
 ```
@@ -106,7 +106,7 @@ for population_data in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.PopulationData().load({"id": "population_data_id"})
+result = client.PopulationData().load()
 ```
 
 ### Common Methods

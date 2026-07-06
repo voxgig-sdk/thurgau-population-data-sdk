@@ -90,7 +90,7 @@ local population_data = client:PopulationData(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | ``$OBJECT`` | No |  |
+| `record` | `table` | No |  |
 
 ### Operations
 
@@ -107,7 +107,7 @@ local results, err = client:PopulationData():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:PopulationData():load({ id = "population_data_id" })
+local result, err = client:PopulationData():load()
 ```
 
 ### Common Methods

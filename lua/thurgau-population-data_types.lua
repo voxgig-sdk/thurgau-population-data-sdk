@@ -10,8 +10,10 @@
 ---@field record? table
 
 ---@class PopulationDataLoadMatch
+---@field record? table
 
 ---@class PopulationDataListMatch
+---@field record? table
 
 local M = {}
 

@@ -18,13 +18,13 @@ class PopulationData
     public ?array $record = null;
 }
 
-/** Match filter for PopulationData#load (any subset of PopulationData fields). */
+/** Request payload for PopulationData#load. */
 class PopulationDataLoadMatch
 {
     public ?array $record = null;
 }
 
-/** Match filter for PopulationData#list (any subset of PopulationData fields). */
+/** Request payload for PopulationData#list. */
 class PopulationDataListMatch
 {
     public ?array $record = null;

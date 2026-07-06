@@ -116,7 +116,7 @@ const population_data = client.PopulationData()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | ``$OBJECT`` | No |  |
+| `record` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -133,7 +133,7 @@ const results = await client.PopulationData().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.PopulationData().load({ id: 'population_data_id' })
+const result = await client.PopulationData().load()
 ```
 
 ### Common Methods

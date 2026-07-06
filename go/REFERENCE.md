@@ -97,7 +97,7 @@ population_data := client.PopulationData(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `record` | ``$OBJECT`` | No |  |
+| `record` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -114,7 +114,7 @@ results, err := client.PopulationData(nil).List(nil, nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.PopulationData(nil).Load(map[string]any{"id": "population_data_id"}, nil)
+result, err := client.PopulationData(nil).Load(nil, nil)
 ```
 
 ### Common Methods
