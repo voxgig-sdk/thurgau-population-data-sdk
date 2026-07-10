@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -395,14 +392,17 @@
           "name": "Open Government Data",
           "url": "https://data.tg.ch"
         },
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server",
             "url": "https://data.tg.ch/api"
           }
         ],
+        "summary": "API providing data on the permanent population of the Thurgau canton since 2007.",
         "title": "Thurgau Population Data",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://data.tg.ch/explore/dataset/sk-stat-56/information/"
       },
       "option": {},
       "target": {
@@ -455,6 +455,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -505,6 +508,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

@@ -50,21 +50,21 @@ import (
 func main() {
     client := sdk.New()
 
-    // List populationdata records — the value is the array of records itself.
-    populationdatas, err := client.PopulationData(nil).List(nil, nil)
+    // List populationData records — the value is the array of records itself.
+    populationDatas, err := client.PopulationData(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-    for _, item := range populationdatas.([]any) {
+    for _, item := range populationDatas.([]any) {
         fmt.Println(item)
     }
 
-    // Load a single populationdata — the value is the loaded record.
-    populationdata, err := client.PopulationData(nil).Load(nil, nil)
+    // Load a single populationData — the value is the loaded record.
+    populationData, err := client.PopulationData(nil).Load(nil, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(populationdata)
+    fmt.Println(populationData)
 }
 ```
 
@@ -144,13 +144,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-populationdata, err := client.PopulationData(nil).List(
+populationData, err := client.PopulationData(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(populationdata) // the returned mock data
+fmt.Println(populationData) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -256,9 +256,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    populationdata, err := client.PopulationData(nil).List(map[string]any{/* fields */}, nil)
+    populationData, err := client.PopulationData(nil).List(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // populationdata is the returned record
+    // populationData is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -282,7 +282,7 @@ API path: `/explore/v2.1/catalog/datasets/sk-stat-56/records`
 
 ### PopulationData
 
-Create an instance: `population_data := client.PopulationData(nil)`
+Create an instance: `populationData := client.PopulationData(nil)`
 
 #### Operations
 
@@ -300,21 +300,21 @@ Create an instance: `population_data := client.PopulationData(nil)`
 #### Example: Load
 
 ```go
-population_data, err := client.PopulationData(nil).Load(nil, nil)
+populationData, err := client.PopulationData(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(population_data) // the loaded record
+fmt.Println(populationData) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-population_datas, err := client.PopulationData(nil).List(nil, nil)
+populationDatas, err := client.PopulationData(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(population_datas) // the array of records
+fmt.Println(populationDatas) // the array of records
 ```
 
 

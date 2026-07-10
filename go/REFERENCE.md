@@ -90,7 +90,8 @@ same parameters as `Direct()`.
 ## PopulationDataEntity
 
 ```go
-population_data := client.PopulationData(nil)
+populationData := client.PopulationData(nil)
+fmt.Println(populationData.GetName()) // "population_data"
 ```
 
 ### Fields
@@ -107,6 +108,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.PopulationData(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -115,6 +120,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.PopulationData(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

@@ -20,9 +20,9 @@ main: {
           url: "https://data.tg.ch/api"
         }
       ]
+      summary: "API providing data on the permanent population of the Thurgau canton since 2007."
       title: "Thurgau Population Data"
       version: "1.0.0"
+      website: "https://data.tg.ch/explore/dataset/sk-stat-56/information/"
     }
   }
-}
-
