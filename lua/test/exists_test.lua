@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- ThurgauPopulationData SDK exists test
 
 local sdk = require("thurgau-population-data_sdk")
 

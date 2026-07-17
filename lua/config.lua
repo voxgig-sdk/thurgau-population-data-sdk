@@ -1,4 +1,4 @@
--- ProjectName SDK configuration
+-- ThurgauPopulationData SDK configuration
 
 local function make_config()
   return {
