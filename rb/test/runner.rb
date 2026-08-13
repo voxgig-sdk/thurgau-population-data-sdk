@@ -23,8 +23,8 @@ module ThurgauPopulationDataTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("THURGAUPOPULATIONDATA_TEST_LIVE")
-    override = getenv("THURGAUPOPULATIONDATA_TEST_OVERRIDE")
+    live = getenv("THURGAU_POPULATION_DATA_TEST_LIVE")
+    override = getenv("THURGAU_POPULATION_DATA_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module ThurgauPopulationDataTestRunner
       end
     end
 
-    explain = getenv("THURGAUPOPULATIONDATA_TEST_EXPLAIN")
-    m["THURGAUPOPULATIONDATA_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("THURGAU_POPULATION_DATA_TEST_EXPLAIN")
+    m["THURGAU_POPULATION_DATA_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

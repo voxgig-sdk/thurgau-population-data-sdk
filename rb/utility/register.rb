@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ ThurgauPopulationDataUtility.registrar = ->(u) {
   u.prepare_params = ThurgauPopulationDataUtilities::PrepareParams
   u.prepare_path = ThurgauPopulationDataUtilities::PreparePath
   u.prepare_query = ThurgauPopulationDataUtilities::PrepareQuery
+  u.graphql_body = ThurgauPopulationDataUtilities::GraphqlBody
+  u.graphql_errors = ThurgauPopulationDataUtilities::GraphqlErrors
   u.result_basic = ThurgauPopulationDataUtilities::ResultBasic
   u.result_body = ThurgauPopulationDataUtilities::ResultBody
   u.result_headers = ThurgauPopulationDataUtilities::ResultHeaders

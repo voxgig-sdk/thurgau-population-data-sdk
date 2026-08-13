@@ -62,7 +62,7 @@ class PopulationDataEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set THURGAU_POPULATION_DATA_TEST_POPULATION_DATA_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -116,22 +116,22 @@ def population_data_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID"]
+  entid_env_raw = ENV["THURGAU_POPULATION_DATA_TEST_POPULATION_DATA_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID" => idmap,
-    "THURGAUPOPULATIONDATA_TEST_LIVE" => "FALSE",
-    "THURGAUPOPULATIONDATA_TEST_EXPLAIN" => "FALSE",
+    "THURGAU_POPULATION_DATA_TEST_POPULATION_DATA_ENTID" => idmap,
+    "THURGAU_POPULATION_DATA_TEST_LIVE" => "FALSE",
+    "THURGAU_POPULATION_DATA_TEST_EXPLAIN" => "FALSE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID"])
+    env["THURGAU_POPULATION_DATA_TEST_POPULATION_DATA_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["THURGAUPOPULATIONDATA_TEST_LIVE"] == "TRUE"
+  if env["THURGAU_POPULATION_DATA_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
       },
@@ -140,13 +140,13 @@ def population_data_basic_setup(extra)
     client = ThurgauPopulationDataSDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["THURGAUPOPULATIONDATA_TEST_LIVE"] == "TRUE"
+  live = env["THURGAU_POPULATION_DATA_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["THURGAUPOPULATIONDATA_TEST_EXPLAIN"] == "TRUE",
+    explain: env["THURGAU_POPULATION_DATA_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

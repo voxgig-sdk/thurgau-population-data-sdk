@@ -48,7 +48,7 @@ end
 
 ```ruby
 begin
-  # load returns the bare PopulationData record (raises on error).
+  # load returns the ENTITY — call data_get for the PopulationData record (raises on error).
   populationdata = client.PopulationData.load()
   puts populationdata
 rescue => err
@@ -131,7 +131,8 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = ThurgauPopulationDataSDK.test
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 populationdata = client.PopulationData.list()
 puts populationdata
 ```
@@ -280,7 +281,7 @@ Create an instance: `population_data = client.PopulationData`
 #### Example: Load
 
 ```ruby
-# load returns the bare PopulationData record (raises on error).
+# load returns the ENTITY — call data_get for the PopulationData record (raises on error).
 population_data = client.PopulationData.load()
 ```
 

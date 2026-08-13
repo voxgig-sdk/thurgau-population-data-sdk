@@ -103,6 +103,7 @@ module ThurgauPopulationDataConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/explore/v2.1/catalog/datasets/sk-stat-56/records",
                   "parts" => [
@@ -126,7 +127,7 @@ module ThurgauPopulationDataConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.results`",
                   },
                   "index$" => 0,
                 },
@@ -152,6 +153,7 @@ module ThurgauPopulationDataConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
                   "parts" => [
@@ -213,6 +215,7 @@ module ThurgauPopulationDataConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv",
                   "parts" => [

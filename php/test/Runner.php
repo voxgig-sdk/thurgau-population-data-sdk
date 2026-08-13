@@ -43,8 +43,8 @@ class ThurgauPopulationDataTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('THURGAUPOPULATIONDATA_TEST_LIVE');
-        $override = self::getenv('THURGAUPOPULATIONDATA_TEST_OVERRIDE');
+        $live = self::getenv('THURGAU_POPULATION_DATA_TEST_LIVE');
+        $override = self::getenv('THURGAU_POPULATION_DATA_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class ThurgauPopulationDataTestRunner
             }
         }
 
-        $explain = self::getenv('THURGAUPOPULATIONDATA_TEST_EXPLAIN');
+        $explain = self::getenv('THURGAU_POPULATION_DATA_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['THURGAUPOPULATIONDATA_TEST_EXPLAIN'] = $explain;
+            $m['THURGAU_POPULATION_DATA_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

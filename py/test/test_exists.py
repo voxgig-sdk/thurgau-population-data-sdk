@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# ThurgauPopulationData SDK exists test
 
 import pytest
 from thurgaupopulationdata_sdk import ThurgauPopulationDataSDK

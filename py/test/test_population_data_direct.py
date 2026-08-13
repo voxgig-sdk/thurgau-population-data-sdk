@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from thurgaupopulationdata_sdk.utility.voxgig_struct import voxgig_struct as vs
 from thurgaupopulationdata_sdk import ThurgauPopulationDataSDK
-from core import helpers
+from thurgaupopulationdata_sdk.core import helpers
 from test import runner
 
 
@@ -95,11 +95,11 @@ def _population_data_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID": {},
-        "THURGAUPOPULATIONDATA_TEST_LIVE": "FALSE",
+        "THURGAU_POPULATION_DATA_TEST_POPULATION_DATA_ENTID": {},
+        "THURGAU_POPULATION_DATA_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("THURGAUPOPULATIONDATA_TEST_LIVE") == "TRUE"
+    live = env.get("THURGAU_POPULATION_DATA_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

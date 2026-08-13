@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import ThurgauPopulationDataSDK
-from core.error import ThurgauPopulationDataError
-from core.result import ThurgauPopulationDataResult
-from core.response import ThurgauPopulationDataResponse
-from core.spec import ThurgauPopulationDataSpec
-from feature.base_feature import ThurgauPopulationDataBaseFeature
+from projectname_sdk.core.error import ThurgauPopulationDataError
+from projectname_sdk.core.result import ThurgauPopulationDataResult
+from projectname_sdk.core.response import ThurgauPopulationDataResponse
+from projectname_sdk.core.spec import ThurgauPopulationDataSpec
+from projectname_sdk.feature.base_feature import ThurgauPopulationDataBaseFeature
 
 
 def _client():

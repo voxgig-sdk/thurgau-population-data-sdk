@@ -38,9 +38,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = ThurgauPopulationDataSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = ThurgauPopulationDataSDK.test({
+  entity: {
+    population_data: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const populationdatas = await client.PopulationData().list()
-// populationdatas is an array of bare PopulationData records populated with mock data
+// populationdatas is an array of PopulationData entities, populated with mock data
+// — call populationdatas[0].data() for the record itself
 console.log(populationdatas)
 ```
 
@@ -110,7 +119,7 @@ import { ThurgauPopulationDataSDK } from '@voxgig-sdk/thurgau-population-data'
 
 const client = new ThurgauPopulationDataSDK()
 
-// List all populationdatas (returns PopulationData[])
+// List all populationdatas (returns PopulationDataEntity[] — .data() for the record)
 const populationdatas = await client.PopulationData().list()
 for (const populationdata of populationdatas) {
   console.log(populationdata)
@@ -191,7 +200,7 @@ $client = new ThurgauPopulationDataSDK();
 $populationdatas = $client->PopulationData()->list();
 print_r($populationdatas);
 
-// Load a specific populationdata (returns the bare record; throws on error)
+// Load a specific populationdata (returns the ENTITY; call data_get() for the record; throws on error)
 $populationdata = $client->PopulationData()->load();
 print_r($populationdata);
 ```
@@ -222,7 +231,7 @@ client = ThurgauPopulationDataSDK.new
 populationdatas = client.PopulationData.list
 puts populationdatas
 
-# Load a specific populationdata (returns the bare record; raises on error)
+# Load a specific populationdata (returns the ENTITY; call data_get for the record)
 populationdata = client.PopulationData.load()
 puts populationdata
 ```
@@ -359,6 +368,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://data.tg.ch](https://data.tg.ch)
 

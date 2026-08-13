@@ -26,8 +26,8 @@ import {
 describe('PopulationDataEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when THURGAUPOPULATIONDATA_TEST_LIVE=TRUE.
-  afterEach(liveDelay('THURGAUPOPULATIONDATA_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when THURGAU_POPULATION_DATA_TEST_LIVE=TRUE.
+  afterEach(liveDelay('THURGAU_POPULATION_DATA_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = ThurgauPopulationDataSDK.test()
@@ -63,12 +63,12 @@ describe('PopulationDataEntity', async () => {
     const population_data_ref01_ent = client.PopulationData()
     const population_data_ref01_match: any = {}
 
-    const population_data_ref01_list = await population_data_ref01_ent.list(population_data_ref01_match)
+    const population_data_ref01_list = (await population_data_ref01_ent.list(population_data_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const population_data_ref01_match_dt0: any = {}
-    const population_data_ref01_data_dt0 = await population_data_ref01_ent.load(population_data_ref01_match_dt0)
+    const population_data_ref01_data_dt0 = (await population_data_ref01_ent.load(population_data_ref01_match_dt0)).data()
     assert(null != population_data_ref01_data_dt0)
 
 

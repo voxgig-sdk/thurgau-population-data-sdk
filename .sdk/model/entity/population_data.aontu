@@ -96,7 +96,7 @@ main: kit: entity: population_data: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.results`"
           }
         }
         {

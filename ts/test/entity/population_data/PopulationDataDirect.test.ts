@@ -19,11 +19,15 @@ import {
 describe('PopulationDataDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when THURGAUPOPULATIONDATA_TEST_LIVE=TRUE.
-  afterEach(liveDelay('THURGAUPOPULATIONDATA_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when THURGAU_POPULATION_DATA_TEST_LIVE=TRUE.
+  afterEach(liveDelay('THURGAU_POPULATION_DATA_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new ThurgauPopulationDataSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -133,17 +137,17 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID': {},
-    'THURGAUPOPULATIONDATA_TEST_LIVE': 'FALSE',
+    'THURGAU_POPULATION_DATA_TEST_POPULATION_DATA_ENTID': {},
+    'THURGAU_POPULATION_DATA_TEST_LIVE': 'FALSE',
   })
 
-  const live = 'TRUE' === env.THURGAUPOPULATIONDATA_TEST_LIVE
+  const live = 'TRUE' === env.THURGAU_POPULATION_DATA_TEST_LIVE
 
   if (live) {
     const client = new ThurgauPopulationDataSDK({
     })
 
-    let idmap: any = env['THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID']
+    let idmap: any = env['THURGAU_POPULATION_DATA_TEST_POPULATION_DATA_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

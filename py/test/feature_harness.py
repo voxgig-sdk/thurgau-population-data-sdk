@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import ThurgauPopulationDataControl
-from core.error import ThurgauPopulationDataError
-from core.result import ThurgauPopulationDataResult
-from core.spec import ThurgauPopulationDataSpec
+from thurgaupopulationdata_sdk.config import make_config
+from thurgaupopulationdata_sdk.features import _make_feature
+from thurgaupopulationdata_sdk.core.control import ThurgauPopulationDataControl
+from thurgaupopulationdata_sdk.core.error import ThurgauPopulationDataError
+from thurgaupopulationdata_sdk.core.result import ThurgauPopulationDataResult
+from thurgaupopulationdata_sdk.core.spec import ThurgauPopulationDataSpec
 
 
 # True when this SDK was generated with the named feature.

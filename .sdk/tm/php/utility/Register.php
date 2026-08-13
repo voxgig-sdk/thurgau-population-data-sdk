@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ ThurgauPopulationDataUtility::setRegistrar(function (ThurgauPopulationDataUtilit
     $u->prepare_params = [ThurgauPopulationDataPrepareParams::class, 'call'];
     $u->prepare_path = [ThurgauPopulationDataPreparePath::class, 'call'];
     $u->prepare_query = [ThurgauPopulationDataPrepareQuery::class, 'call'];
+    $u->graphql_body = [ThurgauPopulationDataGraphql::class, 'body'];
+    $u->graphql_errors = [ThurgauPopulationDataGraphql::class, 'errors'];
     $u->result_basic = [ThurgauPopulationDataResultBasic::class, 'call'];
     $u->result_body = [ThurgauPopulationDataResultBody::class, 'call'];
     $u->result_headers = [ThurgauPopulationDataResultHeaders::class, 'call'];

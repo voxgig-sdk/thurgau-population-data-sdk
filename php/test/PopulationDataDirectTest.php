@@ -111,11 +111,11 @@ function population_data_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "THURGAUPOPULATIONDATA_TEST_POPULATION_DATA_ENTID" => [],
-        "THURGAUPOPULATIONDATA_TEST_LIVE" => "FALSE",
+        "THURGAU_POPULATION_DATA_TEST_POPULATION_DATA_ENTID" => [],
+        "THURGAU_POPULATION_DATA_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["THURGAUPOPULATIONDATA_TEST_LIVE"] === "TRUE";
+    $live = $env["THURGAU_POPULATION_DATA_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

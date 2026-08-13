@@ -35,7 +35,9 @@ const client = new ThurgauPopulationDataSDK()
 
 ### 2. List populationdata records
 
-`list()` resolves to an array of PopulationData objects — iterate it directly:
+`list()` resolves to an array of PopulationData ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const populationdatas = await client.PopulationData().list()
@@ -133,7 +135,8 @@ Create a mock client for unit testing — no server required:
 const client = ThurgauPopulationDataSDK.test()
 
 const populationdata = await client.PopulationData().list()
-// populationdata is a bare entity populated with mock response data
+// populationdata is the entity, populated with mock response data
+// — call populationdata.data() for the record itself
 console.log(populationdata)
 ```
 

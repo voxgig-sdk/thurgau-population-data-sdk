@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'ThurgauPopulationData',
   }
 
 
@@ -132,6 +132,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/explore/v2.1/catalog/datasets/sk-stat-56/records",
               "parts": [
@@ -155,7 +156,7 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.results`"
               },
               "index$": 0
             },
@@ -181,6 +182,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
               "parts": [
@@ -242,6 +244,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv",
               "parts": [
