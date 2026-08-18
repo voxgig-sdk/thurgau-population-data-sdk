@@ -28,7 +28,7 @@ class ThurgauPopulationDataSDK
     utility = ThurgauPopulationDataUtility.new
     @_utility = utility
 
-    config = ThurgauPopulationDataConfig.make_config
+    config = ThurgauPopulationDataConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

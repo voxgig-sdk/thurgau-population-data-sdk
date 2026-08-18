@@ -23,6 +23,7 @@ build = {
   modules = {
     ["thurgau-population-data_sdk"] = "thurgau-population-data_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }

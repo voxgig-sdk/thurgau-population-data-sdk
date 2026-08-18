@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from thurgaupopulationdata_sdk.config import make_config
+from thurgaupopulationdata_sdk.config import shared_config
 from thurgaupopulationdata_sdk.features import _make_feature
 from thurgaupopulationdata_sdk.core.control import ThurgauPopulationDataControl
 from thurgaupopulationdata_sdk.core.error import ThurgauPopulationDataError
@@ -24,7 +24,7 @@ from thurgaupopulationdata_sdk.core.spec import ThurgauPopulationDataSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

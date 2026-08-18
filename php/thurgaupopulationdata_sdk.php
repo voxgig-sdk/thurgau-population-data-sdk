@@ -40,7 +40,7 @@ class ThurgauPopulationDataSDK
         $utility = new ThurgauPopulationDataUtility();
         $this->_utility = $utility;
 
-        $config = ThurgauPopulationDataConfig::make_config();
+        $config = ThurgauPopulationDataConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,
