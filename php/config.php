@@ -33,6 +33,9 @@ class ThurgauPopulationDataConfig
         return [
             "main" => [
                 "name" => "ThurgauPopulationData",
+                "slug" => "thurgau-population-data",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
