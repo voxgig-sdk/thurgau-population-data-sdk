@@ -28,6 +28,7 @@ module ThurgauPopulationDataConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {

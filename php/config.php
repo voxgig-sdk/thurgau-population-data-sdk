@@ -42,6 +42,7 @@ class ThurgauPopulationDataConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
