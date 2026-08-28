@@ -19,12 +19,20 @@ type PopulationData struct {
 
 // PopulationDataLoadMatch is the typed request payload for PopulationData.LoadTyped.
 type PopulationDataLoadMatch struct {
-	Record *map[string]any `json:"record,omitempty"`
+	Delimiter *string `json:"delimiter,omitempty"`
+	Refine *string `json:"refine,omitempty"`
+	Where *string `json:"where,omitempty"`
 }
 
 // PopulationDataListMatch is the typed request payload for PopulationData.ListTyped.
 type PopulationDataListMatch struct {
-	Record *map[string]any `json:"record,omitempty"`
+	Exclude *string `json:"exclude,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	OrderBy *string `json:"order_by,omitempty"`
+	Refine *string `json:"refine,omitempty"`
+	Select *string `json:"select,omitempty"`
+	Where *string `json:"where,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

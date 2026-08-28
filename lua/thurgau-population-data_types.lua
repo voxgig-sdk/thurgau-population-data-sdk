@@ -10,10 +10,18 @@
 ---@field record? table
 
 ---@class PopulationDataLoadMatch
----@field record? table
+---@field delimiter? string
+---@field refine? string
+---@field where? string
 
 ---@class PopulationDataListMatch
----@field record? table
+---@field exclude? string
+---@field limit? number
+---@field offset? number
+---@field order_by? string
+---@field refine? string
+---@field select? string
+---@field where? string
 
 local M = {}
 

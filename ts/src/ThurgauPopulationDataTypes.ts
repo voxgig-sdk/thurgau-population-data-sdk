@@ -10,10 +10,18 @@ export interface PopulationData {
 }
 
 export interface PopulationDataLoadMatch {
-  record?: Record<string, any>
+  delimiter?: string
+  refine?: string
+  where?: string
 }
 
 export interface PopulationDataListMatch {
-  record?: Record<string, any>
+  exclude?: string
+  limit?: number
+  offset?: number
+  order_by?: string
+  refine?: string
+  select?: string
+  where?: string
 }
 

@@ -21,8 +21,16 @@ class PopulationData(TypedDict, total=False):
 
 
 class PopulationDataLoadMatch(TypedDict, total=False):
-    record: dict
+    delimiter: str
+    refine: str
+    where: str
 
 
 class PopulationDataListMatch(TypedDict, total=False):
-    record: dict
+    exclude: str
+    limit: int
+    offset: int
+    order_by: str
+    refine: str
+    select: str
+    where: str

@@ -21,12 +21,20 @@ class PopulationData
 /** Request payload for PopulationData#load. */
 class PopulationDataLoadMatch
 {
-    public ?array $record = null;
+    public ?string $delimiter = null;
+    public ?string $refine = null;
+    public ?string $where = null;
 }
 
 /** Request payload for PopulationData#list. */
 class PopulationDataListMatch
 {
-    public ?array $record = null;
+    public ?string $exclude = null;
+    public ?int $limit = null;
+    public ?int $offset = null;
+    public ?string $order_by = null;
+    public ?string $refine = null;
+    public ?string $select = null;
+    public ?string $where = null;
 }
 
