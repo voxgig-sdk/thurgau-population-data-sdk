@@ -94,13 +94,25 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/explore/v2.1/catalog/datasets/sk-stat-56/records",
-                ["parts"] = {
-                  "explore",
-                  "v2.1",
-                  "catalog",
-                  "datasets",
-                  "sk-stat-56",
-                  "records",
+                ["segments"] = {
+                  {
+                    ["lit"] = "explore",
+                  },
+                  {
+                    ["lit"] = "v2.1",
+                  },
+                  {
+                    ["lit"] = "catalog",
+                  },
+                  {
+                    ["lit"] = "datasets",
+                  },
+                  {
+                    ["lit"] = "sk-stat-56",
+                  },
+                  {
+                    ["lit"] = "records",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -116,6 +128,14 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.results`",
+                },
+                ["parts"] = {
+                  "explore",
+                  "v2.1",
+                  "catalog",
+                  "datasets",
+                  "sk-stat-56",
+                  "records",
                 },
               },
               {
@@ -138,14 +158,28 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
-                ["parts"] = {
-                  "explore",
-                  "v2.1",
-                  "catalog",
-                  "datasets",
-                  "sk-stat-56",
-                  "exports",
-                  "json",
+                ["segments"] = {
+                  {
+                    ["lit"] = "explore",
+                  },
+                  {
+                    ["lit"] = "v2.1",
+                  },
+                  {
+                    ["lit"] = "catalog",
+                  },
+                  {
+                    ["lit"] = "datasets",
+                  },
+                  {
+                    ["lit"] = "sk-stat-56",
+                  },
+                  {
+                    ["lit"] = "exports",
+                  },
+                  {
+                    ["lit"] = "json",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -156,6 +190,15 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "explore",
+                  "v2.1",
+                  "catalog",
+                  "datasets",
+                  "sk-stat-56",
+                  "exports",
+                  "json",
                 },
               },
             },
@@ -191,14 +234,28 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv",
-                ["parts"] = {
-                  "explore",
-                  "v2.1",
-                  "catalog",
-                  "datasets",
-                  "sk-stat-56",
-                  "exports",
-                  "csv",
+                ["segments"] = {
+                  {
+                    ["lit"] = "explore",
+                  },
+                  {
+                    ["lit"] = "v2.1",
+                  },
+                  {
+                    ["lit"] = "catalog",
+                  },
+                  {
+                    ["lit"] = "datasets",
+                  },
+                  {
+                    ["lit"] = "sk-stat-56",
+                  },
+                  {
+                    ["lit"] = "exports",
+                  },
+                  {
+                    ["lit"] = "csv",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -210,6 +267,15 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "explore",
+                  "v2.1",
+                  "catalog",
+                  "datasets",
+                  "sk-stat-56",
+                  "exports",
+                  "csv",
                 },
               },
             },

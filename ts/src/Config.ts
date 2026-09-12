@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -129,13 +140,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/explore/v2.1/catalog/datasets/sk-stat-56/records",
-              "parts": [
-                "explore",
-                "v2.1",
-                "catalog",
-                "datasets",
-                "sk-stat-56",
-                "records"
+              "segments": [
+                {
+                  "lit": "explore"
+                },
+                {
+                  "lit": "v2.1"
+                },
+                {
+                  "lit": "catalog"
+                },
+                {
+                  "lit": "datasets"
+                },
+                {
+                  "lit": "sk-stat-56"
+                },
+                {
+                  "lit": "records"
+                }
               ],
               "select": {
                 "exist": [
@@ -151,7 +174,15 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.results`"
-              }
+              },
+              "parts": [
+                "explore",
+                "v2.1",
+                "catalog",
+                "datasets",
+                "sk-stat-56",
+                "records"
+              ]
             },
             {
               "args": {
@@ -173,14 +204,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
-              "parts": [
-                "explore",
-                "v2.1",
-                "catalog",
-                "datasets",
-                "sk-stat-56",
-                "exports",
-                "json"
+              "segments": [
+                {
+                  "lit": "explore"
+                },
+                {
+                  "lit": "v2.1"
+                },
+                {
+                  "lit": "catalog"
+                },
+                {
+                  "lit": "datasets"
+                },
+                {
+                  "lit": "sk-stat-56"
+                },
+                {
+                  "lit": "exports"
+                },
+                {
+                  "lit": "json"
+                }
               ],
               "select": {
                 "exist": [
@@ -191,7 +236,16 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "explore",
+                "v2.1",
+                "catalog",
+                "datasets",
+                "sk-stat-56",
+                "exports",
+                "json"
+              ]
             }
           ]
         },
@@ -226,14 +280,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv",
-              "parts": [
-                "explore",
-                "v2.1",
-                "catalog",
-                "datasets",
-                "sk-stat-56",
-                "exports",
-                "csv"
+              "segments": [
+                {
+                  "lit": "explore"
+                },
+                {
+                  "lit": "v2.1"
+                },
+                {
+                  "lit": "catalog"
+                },
+                {
+                  "lit": "datasets"
+                },
+                {
+                  "lit": "sk-stat-56"
+                },
+                {
+                  "lit": "exports"
+                },
+                {
+                  "lit": "csv"
+                }
               ],
               "select": {
                 "exist": [
@@ -245,7 +313,16 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "explore",
+                "v2.1",
+                "catalog",
+                "datasets",
+                "sk-stat-56",
+                "exports",
+                "csv"
+              ]
             }
           ]
         }
@@ -261,6 +338,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

@@ -98,13 +98,25 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/explore/v2.1/catalog/datasets/sk-stat-56/records",
-								"parts": []any{
-									"explore",
-									"v2.1",
-									"catalog",
-									"datasets",
-									"sk-stat-56",
-									"records",
+								"segments": []any{
+									map[string]any{
+										"lit": "explore",
+									},
+									map[string]any{
+										"lit": "v2.1",
+									},
+									map[string]any{
+										"lit": "catalog",
+									},
+									map[string]any{
+										"lit": "datasets",
+									},
+									map[string]any{
+										"lit": "sk-stat-56",
+									},
+									map[string]any{
+										"lit": "records",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -120,6 +132,14 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.results`",
+								},
+								"parts": []any{
+									"explore",
+									"v2.1",
+									"catalog",
+									"datasets",
+									"sk-stat-56",
+									"records",
 								},
 							},
 							map[string]any{
@@ -142,14 +162,28 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
-								"parts": []any{
-									"explore",
-									"v2.1",
-									"catalog",
-									"datasets",
-									"sk-stat-56",
-									"exports",
-									"json",
+								"segments": []any{
+									map[string]any{
+										"lit": "explore",
+									},
+									map[string]any{
+										"lit": "v2.1",
+									},
+									map[string]any{
+										"lit": "catalog",
+									},
+									map[string]any{
+										"lit": "datasets",
+									},
+									map[string]any{
+										"lit": "sk-stat-56",
+									},
+									map[string]any{
+										"lit": "exports",
+									},
+									map[string]any{
+										"lit": "json",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -160,6 +194,15 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"explore",
+									"v2.1",
+									"catalog",
+									"datasets",
+									"sk-stat-56",
+									"exports",
+									"json",
 								},
 							},
 						},
@@ -195,14 +238,28 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv",
-								"parts": []any{
-									"explore",
-									"v2.1",
-									"catalog",
-									"datasets",
-									"sk-stat-56",
-									"exports",
-									"csv",
+								"segments": []any{
+									map[string]any{
+										"lit": "explore",
+									},
+									map[string]any{
+										"lit": "v2.1",
+									},
+									map[string]any{
+										"lit": "catalog",
+									},
+									map[string]any{
+										"lit": "datasets",
+									},
+									map[string]any{
+										"lit": "sk-stat-56",
+									},
+									map[string]any{
+										"lit": "exports",
+									},
+									map[string]any{
+										"lit": "csv",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -215,6 +272,15 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
+								"parts": []any{
+									"explore",
+									"v2.1",
+									"catalog",
+									"datasets",
+									"sk-stat-56",
+									"exports",
+									"csv",
+								},
 							},
 						},
 					},
@@ -225,6 +291,17 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+// The plugin definitions the model selected per feature, as []any so a
+// feature package can consume them without core naming its types. Empty
+// when no active feature declares active plugin groups for this target.
+var featurePlugins = map[string][]any{
+}
+
+// FeaturePlugins is the definitions list for one feature's chain.
+func FeaturePlugins(name string) []any {
+	return featurePlugins[name]
 }
 
 var (

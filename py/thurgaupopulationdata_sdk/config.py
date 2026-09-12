@@ -1,6 +1,14 @@
 # ThurgauPopulationData SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -115,13 +123,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/explore/v2.1/catalog/datasets/sk-stat-56/records",
-                "parts": [
-                  "explore",
-                  "v2.1",
-                  "catalog",
-                  "datasets",
-                  "sk-stat-56",
-                  "records",
+                "segments": [
+                  {
+                    "lit": "explore",
+                  },
+                  {
+                    "lit": "v2.1",
+                  },
+                  {
+                    "lit": "catalog",
+                  },
+                  {
+                    "lit": "datasets",
+                  },
+                  {
+                    "lit": "sk-stat-56",
+                  },
+                  {
+                    "lit": "records",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -138,6 +158,14 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.results`",
                 },
+                "parts": [
+                  "explore",
+                  "v2.1",
+                  "catalog",
+                  "datasets",
+                  "sk-stat-56",
+                  "records",
+                ],
               },
               {
                 "args": {
@@ -159,14 +187,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
-                "parts": [
-                  "explore",
-                  "v2.1",
-                  "catalog",
-                  "datasets",
-                  "sk-stat-56",
-                  "exports",
-                  "json",
+                "segments": [
+                  {
+                    "lit": "explore",
+                  },
+                  {
+                    "lit": "v2.1",
+                  },
+                  {
+                    "lit": "catalog",
+                  },
+                  {
+                    "lit": "datasets",
+                  },
+                  {
+                    "lit": "sk-stat-56",
+                  },
+                  {
+                    "lit": "exports",
+                  },
+                  {
+                    "lit": "json",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -178,6 +220,15 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "explore",
+                  "v2.1",
+                  "catalog",
+                  "datasets",
+                  "sk-stat-56",
+                  "exports",
+                  "json",
+                ],
               },
             ],
           },
@@ -212,14 +263,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv",
-                "parts": [
-                  "explore",
-                  "v2.1",
-                  "catalog",
-                  "datasets",
-                  "sk-stat-56",
-                  "exports",
-                  "csv",
+                "segments": [
+                  {
+                    "lit": "explore",
+                  },
+                  {
+                    "lit": "v2.1",
+                  },
+                  {
+                    "lit": "catalog",
+                  },
+                  {
+                    "lit": "datasets",
+                  },
+                  {
+                    "lit": "sk-stat-56",
+                  },
+                  {
+                    "lit": "exports",
+                  },
+                  {
+                    "lit": "csv",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -232,6 +297,15 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "explore",
+                  "v2.1",
+                  "catalog",
+                  "datasets",
+                  "sk-stat-56",
+                  "exports",
+                  "csv",
+                ],
               },
             ],
           },

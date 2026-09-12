@@ -106,13 +106,25 @@ module ThurgauPopulationDataConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/explore/v2.1/catalog/datasets/sk-stat-56/records",
-                  "parts" => [
-                    "explore",
-                    "v2.1",
-                    "catalog",
-                    "datasets",
-                    "sk-stat-56",
-                    "records",
+                  "segments" => [
+                    {
+                      "lit" => "explore",
+                    },
+                    {
+                      "lit" => "v2.1",
+                    },
+                    {
+                      "lit" => "catalog",
+                    },
+                    {
+                      "lit" => "datasets",
+                    },
+                    {
+                      "lit" => "sk-stat-56",
+                    },
+                    {
+                      "lit" => "records",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -129,6 +141,14 @@ module ThurgauPopulationDataConfig
                     "req" => "`reqdata`",
                     "res" => "`body.results`",
                   },
+                  "parts" => [
+                    "explore",
+                    "v2.1",
+                    "catalog",
+                    "datasets",
+                    "sk-stat-56",
+                    "records",
+                  ],
                 },
                 {
                   "args" => {
@@ -150,14 +170,28 @@ module ThurgauPopulationDataConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
-                  "parts" => [
-                    "explore",
-                    "v2.1",
-                    "catalog",
-                    "datasets",
-                    "sk-stat-56",
-                    "exports",
-                    "json",
+                  "segments" => [
+                    {
+                      "lit" => "explore",
+                    },
+                    {
+                      "lit" => "v2.1",
+                    },
+                    {
+                      "lit" => "catalog",
+                    },
+                    {
+                      "lit" => "datasets",
+                    },
+                    {
+                      "lit" => "sk-stat-56",
+                    },
+                    {
+                      "lit" => "exports",
+                    },
+                    {
+                      "lit" => "json",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -169,6 +203,15 @@ module ThurgauPopulationDataConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "explore",
+                    "v2.1",
+                    "catalog",
+                    "datasets",
+                    "sk-stat-56",
+                    "exports",
+                    "json",
+                  ],
                 },
               ],
             },
@@ -203,14 +246,28 @@ module ThurgauPopulationDataConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv",
-                  "parts" => [
-                    "explore",
-                    "v2.1",
-                    "catalog",
-                    "datasets",
-                    "sk-stat-56",
-                    "exports",
-                    "csv",
+                  "segments" => [
+                    {
+                      "lit" => "explore",
+                    },
+                    {
+                      "lit" => "v2.1",
+                    },
+                    {
+                      "lit" => "catalog",
+                    },
+                    {
+                      "lit" => "datasets",
+                    },
+                    {
+                      "lit" => "sk-stat-56",
+                    },
+                    {
+                      "lit" => "exports",
+                    },
+                    {
+                      "lit" => "csv",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -223,6 +280,15 @@ module ThurgauPopulationDataConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "explore",
+                    "v2.1",
+                    "catalog",
+                    "datasets",
+                    "sk-stat-56",
+                    "exports",
+                    "csv",
+                  ],
                 },
               ],
             },
