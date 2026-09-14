@@ -1022,7 +1022,7 @@
             "registry": {
               "active": false,
               "name": "npm",
-              "package": "",
+              "package": "@voxgig-sdk/thurgau-population-data-sdk",
               "state": "pending",
               "url": "https://registry.npmjs.org",
               "vault": {

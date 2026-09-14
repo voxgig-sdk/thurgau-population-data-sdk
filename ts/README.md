@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { ThurgauPopulationDataSDK } from '@voxgig-sdk/thurgau-population-data'
+import { ThurgauPopulationDataSDK } from '@voxgig-sdk/thurgau-population-data-sdk'
 
 const client = new ThurgauPopulationDataSDK()
 ```
@@ -425,7 +425,7 @@ thurgau-population-data/
 Import the SDK from the package root:
 
 ```ts
-import { ThurgauPopulationDataSDK } from '@voxgig-sdk/thurgau-population-data'
+import { ThurgauPopulationDataSDK } from '@voxgig-sdk/thurgau-population-data-sdk'
 ```
 
 ### Entity state

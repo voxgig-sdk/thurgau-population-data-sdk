@@ -105,7 +105,7 @@ local results, err = client:PopulationData():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
+| TypeScript | `@voxgig-sdk/thurgau-population-data-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
 | Python | `voxgig-sdk-thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
 | PHP | `voxgig-sdk/thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/thurgau-population-data-sdk/go` | `go get github.com/voxgig-sdk/thurgau-population-data-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:PopulationData():list()
 ### TypeScript
 
 ```ts
-import { ThurgauPopulationDataSDK } from '@voxgig-sdk/thurgau-population-data'
+import { ThurgauPopulationDataSDK } from '@voxgig-sdk/thurgau-population-data-sdk'
 
 const client = new ThurgauPopulationDataSDK()
 
