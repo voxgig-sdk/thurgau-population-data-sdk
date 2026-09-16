@@ -1,12 +1,18 @@
 # ThurgauPopulationData SDK feature factory
 
 from thurgaupopulationdata_sdk.feature.base_feature import ThurgauPopulationDataBaseFeature
+from thurgaupopulationdata_sdk.feature.ratelimit_feature import ThurgauPopulationDataRatelimitFeature
+from thurgaupopulationdata_sdk.feature.retry_feature import ThurgauPopulationDataRetryFeature
 from thurgaupopulationdata_sdk.feature.test_feature import ThurgauPopulationDataTestFeature
+from thurgaupopulationdata_sdk.feature.timeout_feature import ThurgauPopulationDataTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: ThurgauPopulationDataBaseFeature(),
+    "ratelimit": lambda: ThurgauPopulationDataRatelimitFeature(),
+    "retry": lambda: ThurgauPopulationDataRetryFeature(),
     "test": lambda: ThurgauPopulationDataTestFeature(),
+    "timeout": lambda: ThurgauPopulationDataTimeoutFeature(),
 }
 
 

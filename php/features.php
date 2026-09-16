@@ -4,7 +4,10 @@ declare(strict_types=1);
 // ThurgauPopulationData SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class ThurgauPopulationDataFeatures
@@ -14,8 +17,14 @@ class ThurgauPopulationDataFeatures
         switch ($name) {
             case "base":
                 return new ThurgauPopulationDataBaseFeature();
+            case "ratelimit":
+                return new ThurgauPopulationDataRatelimitFeature();
+            case "retry":
+                return new ThurgauPopulationDataRetryFeature();
             case "test":
                 return new ThurgauPopulationDataTestFeature();
+            case "timeout":
+                return new ThurgauPopulationDataTimeoutFeature();
             default:
                 return new ThurgauPopulationDataBaseFeature();
         }
@@ -31,7 +40,10 @@ class ThurgauPopulationDataFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;
