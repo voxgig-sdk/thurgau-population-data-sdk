@@ -105,12 +105,12 @@ local results, err = client:PopulationData():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/thurgau-population-data-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
-| Python | `voxgig-sdk-thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
-| PHP | `voxgig-sdk/thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
+| TypeScript | `@voxgig-sdk/thurgau-population-data-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/tags) |
+| Python | `voxgig-sdk-thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/tags) |
+| PHP | `voxgig-sdk/thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/thurgau-population-data-sdk/go` | `go get github.com/voxgig-sdk/thurgau-population-data-sdk/go@latest` |
-| Ruby | `voxgig-sdk-thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
-| Lua | `voxgig-sdk-thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/releases) |
+| Ruby | `voxgig-sdk-thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/tags) |
+| Lua | `voxgig-sdk-thurgau-population-data` | publish pending — [install from git tag](https://github.com/voxgig-sdk/thurgau-population-data-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/thurgau-population-data-sdk/go-cli` | `go install github.com/voxgig-sdk/thurgau-population-data-sdk/go-cli/cmd/thurgau-population-data@latest` |
 | Go MCP server | `github.com/voxgig-sdk/thurgau-population-data-sdk/go-mcp` | `go get github.com/voxgig-sdk/thurgau-population-data-sdk/go-mcp@latest` |
 

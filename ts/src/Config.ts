@@ -127,9 +127,9 @@ class Config {
 
     entity: {
       
-      population_data: {
-      },
-
+        population_data: {
+        },
+  
     }
   }
 
