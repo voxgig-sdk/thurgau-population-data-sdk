@@ -43,7 +43,7 @@ local populationdatas, err = client:PopulationData():list()
 if err then error(err) end
 
 for _, item in ipairs(populationdatas) do
-  print(item["record"])
+  print(item)
 end
 ```
 

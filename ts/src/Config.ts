@@ -16,12 +16,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -32,7 +26,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -139,6 +132,7 @@ class Config {
       "fields": [
         {
           "name": "record",
+          "title": "Record",
           "type": "`$OBJECT`"
         }
       ],
@@ -149,54 +143,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "exclude",
-                    "orig": "exclude",
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "example": 10,
-                    "kind": "query",
-                    "name": "limit",
-                    "orig": "limit",
-                    "type": "`$INTEGER`"
-                  },
-                  {
-                    "example": 0,
-                    "kind": "query",
-                    "name": "offset",
-                    "orig": "offset",
-                    "type": "`$INTEGER`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "order_by",
-                    "orig": "order_by",
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "refine",
-                    "orig": "refine",
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "select",
-                    "orig": "select",
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "where",
-                    "orig": "where",
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/explore/v2.1/catalog/datasets/sk-stat-56/records",
@@ -220,6 +166,67 @@ class Config {
                   "lit": "records"
                 }
               ],
+              "parts": [
+                "explore",
+                "v2.1",
+                "catalog",
+                "datasets",
+                "sk-stat-56",
+                "records"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body.results`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "exclude",
+                    "orig": "exclude",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "limit",
+                    "orig": "limit",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "example": 10
+                  },
+                  {
+                    "name": "offset",
+                    "orig": "offset",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "example": 0
+                  },
+                  {
+                    "name": "order_by",
+                    "orig": "order_by",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "refine",
+                    "orig": "refine",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "select",
+                    "orig": "select",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "where",
+                    "orig": "where",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "exclude",
@@ -230,37 +237,9 @@ class Config {
                   "select",
                   "where"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body.results`"
-              },
-              "parts": [
-                "explore",
-                "v2.1",
-                "catalog",
-                "datasets",
-                "sk-stat-56",
-                "records"
-              ]
+              }
             },
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "refine",
-                    "orig": "refine",
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "where",
-                    "orig": "where",
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
@@ -287,16 +266,6 @@ class Config {
                   "lit": "json"
                 }
               ],
-              "select": {
-                "exist": [
-                  "refine",
-                  "where"
-                ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
               "parts": [
                 "explore",
                 "v2.1",
@@ -305,7 +274,34 @@ class Config {
                 "sk-stat-56",
                 "exports",
                 "json"
-              ]
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "refine",
+                    "orig": "refine",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "where",
+                    "orig": "where",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "refine",
+                  "where"
+                ]
+              }
             }
           ]
         },
@@ -314,29 +310,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "example": ";",
-                    "kind": "query",
-                    "name": "delimiter",
-                    "orig": "delimiter",
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "refine",
-                    "orig": "refine",
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "where",
-                    "orig": "where",
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv",
@@ -363,17 +336,6 @@ class Config {
                   "lit": "csv"
                 }
               ],
-              "select": {
-                "exist": [
-                  "delimiter",
-                  "refine",
-                  "where"
-                ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
               "parts": [
                 "explore",
                 "v2.1",
@@ -382,7 +344,42 @@ class Config {
                 "sk-stat-56",
                 "exports",
                 "csv"
-              ]
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "delimiter",
+                    "orig": "delimiter",
+                    "type": "`$STRING`",
+                    "kind": "query",
+                    "example": ";"
+                  },
+                  {
+                    "name": "refine",
+                    "orig": "refine",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "where",
+                    "orig": "where",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "delimiter",
+                  "refine",
+                  "where"
+                ]
+              }
             }
           ]
         }

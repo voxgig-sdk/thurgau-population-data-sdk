@@ -1,0 +1,260 @@
+# Entity: population_data
+
+main: kit: entity: population_data: {
+
+  alias: field: {}
+
+  fields: {
+    record: {
+      h: "Record"
+      n: "record"
+      r: false
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "population_data"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /explore/v2.1/catalog/datasets/sk-stat-56/records"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "exclude"
+                or: "exclude"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "order_by"
+                or: "order_by"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "refine"
+                or: "refine"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "select"
+                or: "select"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "where"
+                or: "where"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/explore/v2.1/catalog/datasets/sk-stat-56/records"
+          q: {
+            exist: [
+              "exclude"
+              "limit"
+              "offset"
+              "order_by"
+              "refine"
+              "select"
+              "where"
+            ]
+          }
+          s: [
+            {
+              lit: "explore"
+            }
+            {
+              lit: "v2.1"
+            }
+            {
+              lit: "catalog"
+            }
+            {
+              lit: "datasets"
+            }
+            {
+              lit: "sk-stat-56"
+            }
+            {
+              lit: "records"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+        {
+          co: {
+            id: "GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "refine"
+                or: "refine"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "where"
+                or: "where"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json"
+          q: {
+            exist: [
+              "refine"
+              "where"
+            ]
+          }
+          s: [
+            {
+              lit: "explore"
+            }
+            {
+              lit: "v2.1"
+            }
+            {
+              lit: "catalog"
+            }
+            {
+              lit: "datasets"
+            }
+            {
+              lit: "sk-stat-56"
+            }
+            {
+              lit: "exports"
+            }
+            {
+              lit: "json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/csv"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: ";"
+                k: "query"
+                n: "delimiter"
+                or: "delimiter"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "refine"
+                or: "refine"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "where"
+                or: "where"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv"
+          q: {
+            exist: [
+              "delimiter"
+              "refine"
+              "where"
+            ]
+          }
+          s: [
+            {
+              lit: "explore"
+            }
+            {
+              lit: "v2.1"
+            }
+            {
+              lit: "catalog"
+            }
+            {
+              lit: "datasets"
+            }
+            {
+              lit: "sk-stat-56"
+            }
+            {
+              lit: "exports"
+            }
+            {
+              lit: "csv"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

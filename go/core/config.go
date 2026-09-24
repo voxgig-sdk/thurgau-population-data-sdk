@@ -91,6 +91,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "record",
+						"title": "Record",
 						"type": "`$OBJECT`",
 					},
 				},
@@ -101,54 +102,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "exclude",
-											"orig": "exclude",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": 10,
-											"kind": "query",
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"example": 0,
-											"kind": "query",
-											"name": "offset",
-											"orig": "offset",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "order_by",
-											"orig": "order_by",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "refine",
-											"orig": "refine",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "select",
-											"orig": "select",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "where",
-											"orig": "where",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/explore/v2.1/catalog/datasets/sk-stat-56/records",
@@ -172,6 +125,67 @@ func MakeConfig() map[string]any {
 										"lit": "records",
 									},
 								},
+								"parts": []any{
+									"explore",
+									"v2.1",
+									"catalog",
+									"datasets",
+									"sk-stat-56",
+									"records",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.results`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "exclude",
+											"orig": "exclude",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 10,
+										},
+										map[string]any{
+											"name": "offset",
+											"orig": "offset",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 0,
+										},
+										map[string]any{
+											"name": "order_by",
+											"orig": "order_by",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "refine",
+											"orig": "refine",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "select",
+											"orig": "select",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "where",
+											"orig": "where",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"exclude",
@@ -183,36 +197,8 @@ func MakeConfig() map[string]any {
 										"where",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.results`",
-								},
-								"parts": []any{
-									"explore",
-									"v2.1",
-									"catalog",
-									"datasets",
-									"sk-stat-56",
-									"records",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "refine",
-											"orig": "refine",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "where",
-											"orig": "where",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
@@ -239,16 +225,6 @@ func MakeConfig() map[string]any {
 										"lit": "json",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"refine",
-										"where",
-									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"explore",
 									"v2.1",
@@ -258,6 +234,33 @@ func MakeConfig() map[string]any {
 									"exports",
 									"json",
 								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "refine",
+											"orig": "refine",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "where",
+											"orig": "where",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"refine",
+										"where",
+									},
+								},
 							},
 						},
 					},
@@ -266,29 +269,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": ";",
-											"kind": "query",
-											"name": "delimiter",
-											"orig": "delimiter",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "refine",
-											"orig": "refine",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "where",
-											"orig": "where",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv",
@@ -315,17 +295,6 @@ func MakeConfig() map[string]any {
 										"lit": "csv",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"delimiter",
-										"refine",
-										"where",
-									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"explore",
 									"v2.1",
@@ -334,6 +303,41 @@ func MakeConfig() map[string]any {
 									"sk-stat-56",
 									"exports",
 									"csv",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "delimiter",
+											"orig": "delimiter",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": ";",
+										},
+										map[string]any{
+											"name": "refine",
+											"orig": "refine",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "where",
+											"orig": "where",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"delimiter",
+										"refine",
+										"where",
+									},
 								},
 							},
 						},
