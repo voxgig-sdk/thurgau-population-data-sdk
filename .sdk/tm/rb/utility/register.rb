@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 ThurgauPopulationDataUtility.registrar = ->(u) {
   u.clean = ThurgauPopulationDataUtilities::Clean
+  u.clean_add = ThurgauPopulationDataUtilities::CleanAdd
+  u.clean_explain = ThurgauPopulationDataUtilities::CleanExplain
   u.done = ThurgauPopulationDataUtilities::Done
   u.make_error = ThurgauPopulationDataUtilities::MakeError
   u.feature_add = ThurgauPopulationDataUtilities::FeatureAdd

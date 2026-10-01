@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 ThurgauPopulationDataUtility::setRegistrar(function (ThurgauPopulationDataUtility $u): void {
     $u->clean = [ThurgauPopulationDataClean::class, 'call'];
+    $u->clean_add = [ThurgauPopulationDataClean::class, 'add'];
+    $u->clean_explain = [ThurgauPopulationDataDone::class, 'clean_explain'];
     $u->done = [ThurgauPopulationDataDone::class, 'call'];
     $u->make_error = [ThurgauPopulationDataMakeError::class, 'call'];
     $u->feature_add = [ThurgauPopulationDataFeatureAdd::class, 'call'];
