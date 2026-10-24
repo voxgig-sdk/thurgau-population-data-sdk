@@ -114,6 +114,70 @@
                 {
                   "a": true,
                   "co": {
+                    "id": "GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "query": [
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "refine",
+                        "or": "refine",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "where",
+                        "or": "where",
+                        "r": false,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
+                  "q": {},
+                  "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "explore"
+                    },
+                    {
+                      "lit": "v2.1"
+                    },
+                    {
+                      "lit": "catalog"
+                    },
+                    {
+                      "lit": "datasets"
+                    },
+                    {
+                      "lit": "sk-stat-56"
+                    },
+                    {
+                      "lit": "exports"
+                    },
+                    {
+                      "lit": "json"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                },
+                {
+                  "a": true,
+                  "co": {
                     "id": "GET /explore/v2.1/catalog/datasets/sk-stat-56/records",
                     "source": "openapi3",
                     "version": 2
@@ -183,18 +247,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/explore/v2.1/catalog/datasets/sk-stat-56/records",
-                  "q": {
-                    "exist": [
-                      "exclude",
-                      "limit",
-                      "offset",
-                      "order_by",
-                      "refine",
-                      "select",
-                      "where"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "explore"
@@ -218,71 +276,6 @@
                   "t": {
                     "req": "`reqdata`",
                     "res": "`body.results`"
-                  }
-                },
-                {
-                  "a": true,
-                  "co": {
-                    "id": "GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {
-                    "query": [
-                      {
-                        "a": true,
-                        "k": "query",
-                        "n": "refine",
-                        "or": "refine",
-                        "r": false,
-                        "t": "`$STRING`"
-                      },
-                      {
-                        "a": true,
-                        "k": "query",
-                        "n": "where",
-                        "or": "where",
-                        "r": false,
-                        "t": "`$STRING`"
-                      }
-                    ]
-                  },
-                  "k": "http",
-                  "m": "GET",
-                  "o": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
-                  "q": {
-                    "exist": [
-                      "refine",
-                      "where"
-                    ]
-                  },
-                  "r": {},
-                  "s": [
-                    {
-                      "lit": "explore"
-                    },
-                    {
-                      "lit": "v2.1"
-                    },
-                    {
-                      "lit": "catalog"
-                    },
-                    {
-                      "lit": "datasets"
-                    },
-                    {
-                      "lit": "sk-stat-56"
-                    },
-                    {
-                      "lit": "exports"
-                    },
-                    {
-                      "lit": "json"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
                   }
                 }
               ]
@@ -330,14 +323,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv",
-                  "q": {
-                    "exist": [
-                      "delimiter",
-                      "refine",
-                      "where"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "raw",
+                    "media": "text/csv"
+                  },
                   "s": [
                     {
                       "lit": "explore"
@@ -696,6 +687,7 @@
             },
             "optspec": {
               "clearTimer": "`$FUNCTION`",
+              "now": "`$FUNCTION`",
               "setTimer": "`$FUNCTION`"
             },
             "strict": false
@@ -859,7 +851,7 @@
       "optspec": {
         "allow": {
           "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
-          "op": "create,update,load,list,remove,command,direct,graphql"
+          "op": "create,update,patch,load,list,remove,command,direct,graphql"
         },
         "apikey": "",
         "auth": {
@@ -912,6 +904,11 @@
         "top": {
           "active": true
         }
+      },
+      "publisher": {
+        "name": "",
+        "security": "",
+        "url": ""
       },
       "repo": {
         "host": "github.com",
@@ -1142,7 +1139,10 @@
             "version": "0.0.1"
           },
           "superseded": [],
-          "title": "Go MCP server"
+          "title": "Go MCP server",
+          "tool": {
+            "write": false
+          }
         },
         "lua": {
           "active": true,
@@ -1519,6 +1519,17 @@
           "base": "",
           "strict": true
         }
+      },
+      "text": {
+        "about_md": "",
+        "docs_url": "",
+        "entity_desc": {},
+        "homepage": "",
+        "meta_source": "",
+        "summary": "",
+        "tagline": "",
+        "title": "",
+        "website": ""
       }
     }
   },

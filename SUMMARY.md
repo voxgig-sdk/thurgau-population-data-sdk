@@ -14,7 +14,7 @@ An entity groups related API operations. An operation can have several routes wi
 
 ### PopulationData
 
-Results: Successful response with population records; Successful export of population data.
+Results: Successful export of population data; Successful response with population records.
 
 SDK operations: `list`, `load`.
 
@@ -24,8 +24,8 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 
 | Entity | SDK operation | HTTP route | Authentication |
 | --- | --- | --- | --- |
-| PopulationData | `list` | `GET /explore/v2.1/catalog/datasets/sk-stat-56/records` | See reference |
 | PopulationData | `list` | `GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json` | See reference |
+| PopulationData | `list` | `GET /explore/v2.1/catalog/datasets/sk-stat-56/records` | See reference |
 | PopulationData | `load` | `GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/csv` | See reference |
 
 ## Connect to the API

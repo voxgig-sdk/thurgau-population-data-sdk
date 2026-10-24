@@ -67,6 +67,7 @@ local function make_config()
         },
         ["optspec"] = {
           ["clearTimer"] = "`$FUNCTION`",
+          ["now"] = "`$FUNCTION`",
           ["setTimer"] = "`$FUNCTION`",
         },
         ["strict"] = false,
@@ -97,6 +98,69 @@ local function make_config()
             ["input"] = "data",
             ["name"] = "list",
             ["points"] = {
+              {
+                ["kind"] = "http",
+                ["method"] = "GET",
+                ["orig"] = "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
+                ["segments"] = {
+                  {
+                    ["lit"] = "explore",
+                  },
+                  {
+                    ["lit"] = "v2.1",
+                  },
+                  {
+                    ["lit"] = "catalog",
+                  },
+                  {
+                    ["lit"] = "datasets",
+                  },
+                  {
+                    ["lit"] = "sk-stat-56",
+                  },
+                  {
+                    ["lit"] = "exports",
+                  },
+                  {
+                    ["lit"] = "json",
+                  },
+                },
+                ["parts"] = {
+                  "explore",
+                  "v2.1",
+                  "catalog",
+                  "datasets",
+                  "sk-stat-56",
+                  "exports",
+                  "json",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "refine",
+                      ["orig"] = "refine",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                    {
+                      ["name"] = "where",
+                      ["orig"] = "where",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                  },
+                },
+                ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
+              },
               {
                 ["kind"] = "http",
                 ["method"] = "GET",
@@ -182,80 +246,10 @@ local function make_config()
                     },
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "exclude",
-                    "limit",
-                    "offset",
-                    "order_by",
-                    "refine",
-                    "select",
-                    "where",
-                  },
-                },
-              },
-              {
-                ["kind"] = "http",
-                ["method"] = "GET",
-                ["orig"] = "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
-                ["segments"] = {
-                  {
-                    ["lit"] = "explore",
-                  },
-                  {
-                    ["lit"] = "v2.1",
-                  },
-                  {
-                    ["lit"] = "catalog",
-                  },
-                  {
-                    ["lit"] = "datasets",
-                  },
-                  {
-                    ["lit"] = "sk-stat-56",
-                  },
-                  {
-                    ["lit"] = "exports",
-                  },
-                  {
-                    ["lit"] = "json",
-                  },
-                },
-                ["parts"] = {
-                  "explore",
-                  "v2.1",
-                  "catalog",
-                  "datasets",
-                  "sk-stat-56",
-                  "exports",
-                  "json",
-                },
-                ["rename"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["name"] = "refine",
-                      ["orig"] = "refine",
-                      ["type"] = "`$STRING`",
-                      ["kind"] = "query",
-                    },
-                    {
-                      ["name"] = "where",
-                      ["orig"] = "where",
-                      ["type"] = "`$STRING`",
-                      ["kind"] = "query",
-                    },
-                  },
-                },
-                ["select"] = {
-                  ["exist"] = {
-                    "refine",
-                    "where",
-                  },
+                ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -328,12 +322,10 @@ local function make_config()
                     },
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "delimiter",
-                    "refine",
-                    "where",
-                  },
+                ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "raw",
+                  ["media"] = "text/csv",
                 },
               },
             },

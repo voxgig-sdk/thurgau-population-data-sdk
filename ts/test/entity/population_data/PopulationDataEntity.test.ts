@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { ThurgauPopulationDataSDK, BaseFeature, stdutil } from '../../..'
+import { ThurgauPopulationDataSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('PopulationDataEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('population_data hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of ThurgauPopulationDataSDK.test(offline).PopulationData().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of ThurgauPopulationDataSDK.test(offline).PopulationData()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = ThurgauPopulationDataSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.PopulationData().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of ThurgauPopulationDataSDK.test().PopulationData().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new ThurgauPopulationDataSDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.PopulationData().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.PopulationData().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = ThurgauPopulationDataSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.PopulationData().list({"exclude":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.THURGAU_POPULATION_DATA_TEST_LIVE
@@ -51,7 +109,7 @@ describe('PopulationDataEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"record":{"a":true,"h":"Record","n":"record","r":false,"t":"`$OBJECT`","key$":"record","index$":0}},"name":"population_data","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /explore/v2.1/catalog/datasets/sk-stat-56/records","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"exclude","or":"exclude","r":false,"t":"`$STRING`","index$":0},{"a":true,"ex":10,"k":"query","n":"limit","or":"limit","r":false,"t":"`$INTEGER`","index$":1},{"a":true,"ex":0,"k":"query","n":"offset","or":"offset","r":false,"t":"`$INTEGER`","index$":2},{"a":true,"k":"query","n":"order_by","or":"order_by","r":false,"t":"`$STRING`","index$":3},{"a":true,"k":"query","n":"refine","or":"refine","r":false,"t":"`$STRING`","index$":4},{"a":true,"k":"query","n":"select","or":"select","r":false,"t":"`$STRING`","index$":5},{"a":true,"k":"query","n":"where","or":"where","r":false,"t":"`$STRING`","index$":6}]},"k":"http","m":"GET","o":"/explore/v2.1/catalog/datasets/sk-stat-56/records","q":{"exist":["exclude","limit","offset","order_by","refine","select","where"]},"r":{},"s":[{"lit":"explore"},{"lit":"v2.1"},{"lit":"catalog"},{"lit":"datasets"},{"lit":"sk-stat-56"},{"lit":"records"}],"t":{"req":"`reqdata`","res":"`body.results`"},"index$":0},{"a":true,"co":{"id":"GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"refine","or":"refine","r":false,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"where","or":"where","r":false,"t":"`$STRING`","index$":1}]},"k":"http","m":"GET","o":"/explore/v2.1/catalog/datasets/sk-stat-56/exports/json","q":{"exist":["refine","where"]},"r":{},"s":[{"lit":"explore"},{"lit":"v2.1"},{"lit":"catalog"},{"lit":"datasets"},{"lit":"sk-stat-56"},{"lit":"exports"},{"lit":"json"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/csv","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":";","k":"query","n":"delimiter","or":"delimiter","r":false,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"refine","or":"refine","r":false,"t":"`$STRING`","index$":1},{"a":true,"k":"query","n":"where","or":"where","r":false,"t":"`$STRING`","index$":2}]},"k":"http","m":"GET","o":"/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv","q":{"exist":["delimiter","refine","where"]},"r":{},"s":[{"lit":"explore"},{"lit":"v2.1"},{"lit":"catalog"},{"lit":"datasets"},{"lit":"sk-stat-56"},{"lit":"exports"},{"lit":"csv"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"population_data","name__orig":"population_data","Name":"PopulationData","name_":"population_data","name-":"population-data","NAME":"POPULATION_DATA","index$":0}, {"active":true,"entity":"population_data","key$":"BasicPopulationDataFlow","kind":"basic","name":"BasicPopulationDataFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"population_data_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"population_data_ref01","srcdatavar":"population_data_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-population_data_ref01"}}],"index$":1}]}, 'PopulationData', {"GET /explore/v2.1/catalog/datasets/sk-stat-56/records":{"protocol":"http","parameters":[{"name":"select","in":"query","description":"Fields to include in the response","required":false,"schema":{"type":"string"},"index$":0},{"name":"where","in":"query","description":"Filter expression to apply to records","required":false,"schema":{"type":"string"},"index$":1},{"name":"limit","in":"query","description":"Maximum number of records to return","required":false,"schema":{"type":"integer","default":10,"maximum":100},"index$":2},{"name":"offset","in":"query","description":"Number of records to skip for pagination","required":false,"schema":{"type":"integer","default":0},"index$":3},{"name":"order_by","in":"query","description":"Field(s) to order results by","required":false,"schema":{"type":"string"},"index$":4},{"name":"refine","in":"query","description":"Refine results by specific facet values","required":false,"schema":{"type":"string"},"index$":5},{"name":"exclude","in":"query","description":"Exclude specific facet values from results","required":false,"schema":{"type":"string"},"index$":6}]},"GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json":{"protocol":"http","parameters":[{"name":"where","in":"query","description":"Filter expression to apply to exported records","required":false,"schema":{"type":"string"},"index$":0},{"name":"refine","in":"query","description":"Refine export by specific facet values","required":false,"schema":{"type":"string"},"index$":1}]},"GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/csv":{"protocol":"http","parameters":[{"name":"where","in":"query","description":"Filter expression to apply to exported records","required":false,"schema":{"type":"string"},"index$":0},{"name":"refine","in":"query","description":"Refine export by specific facet values","required":false,"schema":{"type":"string"},"index$":1},{"name":"delimiter","in":"query","description":"CSV delimiter character","required":false,"schema":{"type":"string","default":";"},"index$":2}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"record":{"a":true,"h":"Record","n":"record","r":false,"t":"`$OBJECT`","key$":"record","index$":0}},"name":"population_data","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"refine","or":"refine","r":false,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"where","or":"where","r":false,"t":"`$STRING`","index$":1}]},"k":"http","m":"GET","o":"/explore/v2.1/catalog/datasets/sk-stat-56/exports/json","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"explore"},{"lit":"v2.1"},{"lit":"catalog"},{"lit":"datasets"},{"lit":"sk-stat-56"},{"lit":"exports"},{"lit":"json"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"GET /explore/v2.1/catalog/datasets/sk-stat-56/records","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"exclude","or":"exclude","r":false,"t":"`$STRING`","index$":0},{"a":true,"ex":10,"k":"query","n":"limit","or":"limit","r":false,"t":"`$INTEGER`","index$":1},{"a":true,"ex":0,"k":"query","n":"offset","or":"offset","r":false,"t":"`$INTEGER`","index$":2},{"a":true,"k":"query","n":"order_by","or":"order_by","r":false,"t":"`$STRING`","index$":3},{"a":true,"k":"query","n":"refine","or":"refine","r":false,"t":"`$STRING`","index$":4},{"a":true,"k":"query","n":"select","or":"select","r":false,"t":"`$STRING`","index$":5},{"a":true,"k":"query","n":"where","or":"where","r":false,"t":"`$STRING`","index$":6}]},"k":"http","m":"GET","o":"/explore/v2.1/catalog/datasets/sk-stat-56/records","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"explore"},{"lit":"v2.1"},{"lit":"catalog"},{"lit":"datasets"},{"lit":"sk-stat-56"},{"lit":"records"}],"t":{"req":"`reqdata`","res":"`body.results`"},"index$":1}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/csv","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":";","k":"query","n":"delimiter","or":"delimiter","r":false,"t":"`$STRING`","index$":0},{"a":true,"k":"query","n":"refine","or":"refine","r":false,"t":"`$STRING`","index$":1},{"a":true,"k":"query","n":"where","or":"where","r":false,"t":"`$STRING`","index$":2}]},"k":"http","m":"GET","o":"/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv","q":{},"r":{},"rs":{"kind":"raw","media":"text/csv"},"s":[{"lit":"explore"},{"lit":"v2.1"},{"lit":"catalog"},{"lit":"datasets"},{"lit":"sk-stat-56"},{"lit":"exports"},{"lit":"csv"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"population_data","name__orig":"population_data","Name":"PopulationData","name_":"population_data","name-":"population-data","NAME":"POPULATION_DATA","index$":0}, {"active":true,"entity":"population_data","key$":"BasicPopulationDataFlow","kind":"basic","name":"BasicPopulationDataFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"population_data_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"population_data_ref01","srcdatavar":"population_data_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-population_data_ref01"}}],"index$":1}]}, 'PopulationData', {"GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json":{"protocol":"http","parameters":[{"name":"where","in":"query","description":"Filter expression to apply to exported records","required":false,"schema":{"type":"string"},"index$":0},{"name":"refine","in":"query","description":"Refine export by specific facet values","required":false,"schema":{"type":"string"},"index$":1}]},"GET /explore/v2.1/catalog/datasets/sk-stat-56/records":{"protocol":"http","parameters":[{"name":"select","in":"query","description":"Fields to include in the response","required":false,"schema":{"type":"string"},"index$":0},{"name":"where","in":"query","description":"Filter expression to apply to records","required":false,"schema":{"type":"string"},"index$":1},{"name":"limit","in":"query","description":"Maximum number of records to return","required":false,"schema":{"type":"integer","default":10,"maximum":100},"index$":2},{"name":"offset","in":"query","description":"Number of records to skip for pagination","required":false,"schema":{"type":"integer","default":0},"index$":3},{"name":"order_by","in":"query","description":"Field(s) to order results by","required":false,"schema":{"type":"string"},"index$":4},{"name":"refine","in":"query","description":"Refine results by specific facet values","required":false,"schema":{"type":"string"},"index$":5},{"name":"exclude","in":"query","description":"Exclude specific facet values from results","required":false,"schema":{"type":"string"},"index$":6}]},"GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/csv":{"protocol":"http","parameters":[{"name":"where","in":"query","description":"Filter expression to apply to exported records","required":false,"schema":{"type":"string"},"index$":0},{"name":"refine","in":"query","description":"Refine export by specific facet values","required":false,"schema":{"type":"string"},"index$":1},{"name":"delimiter","in":"query","description":"CSV delimiter character","required":false,"schema":{"type":"string","default":";"},"index$":2}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -78,6 +136,12 @@ describe('PopulationDataEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

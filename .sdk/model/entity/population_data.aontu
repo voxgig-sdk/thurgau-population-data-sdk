@@ -20,6 +20,64 @@ main: kit: entity: population_data: {
       points: [
         {
           co: {
+            id: "GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "refine"
+                or: "refine"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "where"
+                or: "where"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "explore"
+            }
+            {
+              lit: "v2.1"
+            }
+            {
+              lit: "catalog"
+            }
+            {
+              lit: "datasets"
+            }
+            {
+              lit: "sk-stat-56"
+            }
+            {
+              lit: "exports"
+            }
+            {
+              lit: "json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
             id: "GET /explore/v2.1/catalog/datasets/sk-stat-56/records"
             source: "openapi3"
             version: 2
@@ -81,16 +139,9 @@ main: kit: entity: population_data: {
           }
           m: "GET"
           o: "/explore/v2.1/catalog/datasets/sk-stat-56/records"
-          q: {
-            exist: [
-              "exclude"
-              "limit"
-              "offset"
-              "order_by"
-              "refine"
-              "select"
-              "where"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -115,66 +166,6 @@ main: kit: entity: population_data: {
           t: {
             req: "`reqdata`"
             res: "`body.results`"
-          }
-        }
-        {
-          co: {
-            id: "GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json"
-            source: "openapi3"
-            version: 2
-          }
-          g: {
-            query: [
-              {
-                k: "query"
-                n: "refine"
-                or: "refine"
-                r: false
-                t: "`$STRING`"
-              }
-              {
-                k: "query"
-                n: "where"
-                or: "where"
-                r: false
-                t: "`$STRING`"
-              }
-            ]
-          }
-          m: "GET"
-          o: "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json"
-          q: {
-            exist: [
-              "refine"
-              "where"
-            ]
-          }
-          s: [
-            {
-              lit: "explore"
-            }
-            {
-              lit: "v2.1"
-            }
-            {
-              lit: "catalog"
-            }
-            {
-              lit: "datasets"
-            }
-            {
-              lit: "sk-stat-56"
-            }
-            {
-              lit: "exports"
-            }
-            {
-              lit: "json"
-            }
-          ]
-          t: {
-            req: "`reqdata`"
-            res: "`body`"
           }
         }
       ]
@@ -216,12 +207,9 @@ main: kit: entity: population_data: {
           }
           m: "GET"
           o: "/explore/v2.1/catalog/datasets/sk-stat-56/exports/csv"
-          q: {
-            exist: [
-              "delimiter"
-              "refine"
-              "where"
-            ]
+          rs: {
+            kind: "raw"
+            media: "text/csv"
           }
           s: [
             {

@@ -1,0 +1,11 @@
+{
+  point: "warning"
+  note: "Points GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json and GET /explore/v2.1/catalog/datasets/sk-stat-56/records on entity=population_data op=list have the same selector (exist: none), so only GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "population_data"
+  op: "list"
+  points: [
+    "GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json"
+    "GET /explore/v2.1/catalog/datasets/sk-stat-56/records"
+  ]
+
+}

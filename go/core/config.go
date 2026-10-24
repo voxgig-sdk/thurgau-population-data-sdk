@@ -71,6 +71,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -101,6 +102,69 @@ func MakeConfig() map[string]any {
 						"input": "data",
 						"name": "list",
 						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
+								"segments": []any{
+									map[string]any{
+										"lit": "explore",
+									},
+									map[string]any{
+										"lit": "v2.1",
+									},
+									map[string]any{
+										"lit": "catalog",
+									},
+									map[string]any{
+										"lit": "datasets",
+									},
+									map[string]any{
+										"lit": "sk-stat-56",
+									},
+									map[string]any{
+										"lit": "exports",
+									},
+									map[string]any{
+										"lit": "json",
+									},
+								},
+								"parts": []any{
+									"explore",
+									"v2.1",
+									"catalog",
+									"datasets",
+									"sk-stat-56",
+									"exports",
+									"json",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "refine",
+											"orig": "refine",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "where",
+											"orig": "where",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
+							},
 							map[string]any{
 								"kind": "http",
 								"method": "GET",
@@ -186,80 +250,10 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"exclude",
-										"limit",
-										"offset",
-										"order_by",
-										"refine",
-										"select",
-										"where",
-									},
-								},
-							},
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/explore/v2.1/catalog/datasets/sk-stat-56/exports/json",
-								"segments": []any{
-									map[string]any{
-										"lit": "explore",
-									},
-									map[string]any{
-										"lit": "v2.1",
-									},
-									map[string]any{
-										"lit": "catalog",
-									},
-									map[string]any{
-										"lit": "datasets",
-									},
-									map[string]any{
-										"lit": "sk-stat-56",
-									},
-									map[string]any{
-										"lit": "exports",
-									},
-									map[string]any{
-										"lit": "json",
-									},
-								},
-								"parts": []any{
-									"explore",
-									"v2.1",
-									"catalog",
-									"datasets",
-									"sk-stat-56",
-									"exports",
-									"json",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"name": "refine",
-											"orig": "refine",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "where",
-											"orig": "where",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"refine",
-										"where",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -332,12 +326,10 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"delimiter",
-										"refine",
-										"where",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "raw",
+									"media": "text/csv",
 								},
 							},
 						},

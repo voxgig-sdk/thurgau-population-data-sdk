@@ -23,12 +23,12 @@
     }
   },
   "requests": {
-    "GET /explore/v2.1/catalog/datasets/sk-stat-56/records": {
+    "GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"
     },
-    "GET /explore/v2.1/catalog/datasets/sk-stat-56/exports/json": {
+    "GET /explore/v2.1/catalog/datasets/sk-stat-56/records": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"
